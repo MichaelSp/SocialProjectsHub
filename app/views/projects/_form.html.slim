@@ -1,0 +1,36 @@
+.ui.segment
+  = form_for(@project, class: 'ui form') do |f|
+    - if @project.errors.any?
+      #error_explanation
+        h2
+          = pluralize(@project.errors.count, "error")
+          |  prohibited this project from being saved:
+        ul
+          - @project.errors.full_messages.each do |message|
+            li
+              = message
+    .field
+      = f.label :name
+      br
+      = f.text_field :name
+    .field
+      = f.label :gps_position
+      br
+      = f.text_field :gps_position
+
+    h4.ui.divider.header Positions
+    = f.fields_for :positions do |position|
+      .field
+        = position.label :target_group
+        br
+        = position.collection_select :target_group, Position.target_groups.map { |t| [t.first, t.first.humanize] }, :first, :second, class: 'ui dropdown'
+      .field
+        = position.label :pos
+        br
+        = position.number_field :pos
+    .field
+      = f.label :rating
+      br
+      = f.number_field :rating
+    .actions
+      = f.submit

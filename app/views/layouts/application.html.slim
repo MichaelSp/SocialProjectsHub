@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title
+      | Umbrella
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    .ui.four.item.large.menu
+      = link_to "Refugees", refugee_projects_path, class: 'item'
+      =link_to "Project Leader", entrepreneur_projects_path, class: 'item'
+      =link_to "Community", community_projects_path, class: 'item'
+      =link_to "Volunteers", volunteer_projects_path, class: 'item'
+    .ui.segment
+      = render 'layouts/filter'
+    = yield

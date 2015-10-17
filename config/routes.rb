@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
   resources :categories
   resources :users
-  resources :projects
+  resources :projects do
+    collection do
+      get :refugee
+      get :community
+      get :entrepreneur
+      get :volunteer
+    end
+  end
+
+  root 'projects#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

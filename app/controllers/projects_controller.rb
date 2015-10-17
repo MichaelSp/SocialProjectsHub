@@ -4,7 +4,14 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.all.order(:position)
+  end
+
+  [:refugee, :community, :entrepreneur, :volunteer].each do |name|
+    define_method name do
+      @projects = Project.includes(:positions).where(positions: { target_group: Position.target_groups[name] })
+      render :index
+    end
   end
 
   # GET /projects/1
@@ -15,10 +22,12 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @project.positions.build
   end
 
   # GET /projects/1/edit
   def edit
+    @project.positions.build if @project.positions.empty?
   end
 
   # POST /projects
@@ -69,6 +78,7 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :gps_position, :target_group, :rating)
+      params.require(:project).permit(:name, :gps_position, :target_group, :rating,
+                                      positions_attributes: [:pos, :target_group])
     end
 end

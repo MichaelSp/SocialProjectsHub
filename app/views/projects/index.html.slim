@@ -1,0 +1,29 @@
+p#notice
+  = notice
+
+.ui.link.cards
+  - @projects.each do |project|
+    .card
+      a.image href=edit_project_path(project)
+        = image_tag 'placeholder.png'
+      .content
+        .header= project.name
+        .meta
+          .ui.star.rating data-rating=project.rating
+          =project.rating
+          -project.categories.each do |category|
+            = link_to project
+        .description
+          = project.description
+          - project.links.each do |link|
+            = link_to link.name, link.url, class: 'ui button'
+      .extra.content
+        span.right.floated
+          | Founded #{project.created_at}
+        span
+          i.user.icon
+          = project.owners.pluck(:name).join ", "
+
+br
+hr
+p= link_to 'New Project', new_project_path, class: 'ui green button'

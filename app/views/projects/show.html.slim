@@ -1,0 +1,21 @@
+p#notice
+  = notice
+p
+  strong
+    | Name:
+  = @project.name
+p
+  strong
+    | Gps position:
+  = @project.gps_position
+p
+  strong
+    | Target group:
+  = @project.target_group
+p
+  strong
+    | Rating:
+  = @project.rating
+= link_to 'Edit', edit_project_path(@project)
+|  | 
+= link_to 'Back', projects_path

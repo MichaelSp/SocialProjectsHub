@@ -11,6 +11,13 @@
  * file per style scope.
  *
  *= require semantic-ui
+ *= require animate
  *= require_tree .
  *= require_self
  */
+
+.ui.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

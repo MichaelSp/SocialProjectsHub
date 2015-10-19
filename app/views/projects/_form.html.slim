@@ -1,36 +1,16 @@
 .ui.segment
-  = form_for(@project, class: 'ui form') do |f|
-    - if @project.errors.any?
-      #error_explanation
-        h2
-          = pluralize(@project.errors.count, "error")
-          |  prohibited this project from being saved:
-        ul
-          - @project.errors.full_messages.each do |message|
-            li
-              = message
+  = form_for(@project, html: {class: 'ui large form'}) do |f|
+    = f.validation_errors
+    = f.text_field :name
+    = f.text_field :gps_position
     .field
-      = f.label :name
-      br
-      = f.text_field :name
-    .field
-      = f.label :gps_position
-      br
-      = f.text_field :gps_position
+      label Rating
+      .ui.huge.star.rating#project_rating data-max-rating="5" data-rating=(f.object.rating || 0).to_s
+      = f.hidden_field :rating
 
-    h4.ui.divider.header Positions
-    = f.fields_for :positions do |position|
-      .field
-        = position.label :target_group
-        br
-        = position.collection_select :target_group, Position.target_groups.map { |t| [t.first, t.first.humanize] }, :first, :second, class: 'ui dropdown'
-      .field
-        = position.label :pos
-        br
-        = position.number_field :pos
-    .field
-      = f.label :rating
-      br
-      = f.number_field :rating
+    .ui.divider
+    .fields
+      = f.fields_for :positions, nil, html: {class: "four wide fields"} do |p|
+        = p.number_field :pos, label: "#{target_group} Position", min: 0
     .actions
       = f.submit

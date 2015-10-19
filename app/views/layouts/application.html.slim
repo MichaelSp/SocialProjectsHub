@@ -7,11 +7,23 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    .ui.four.item.large.menu
-      = link_to "Refugees", refugee_projects_path, class: 'item'
-      =link_to "Project Leader", entrepreneur_projects_path, class: 'item'
-      =link_to "Community", community_projects_path, class: 'item'
-      =link_to "Volunteers", volunteer_projects_path, class: 'item'
-    .ui.segment
-      = render 'layouts/filter'
-    = yield
+    .ui.four.item.large.inverted.menu
+      = link_to "Refugees", projects_path(target_group: "refugee"), class: 'red item'
+      = link_to "Project Leader", projects_path(target_group: 'entrepreneur'), class: 'item'
+      = link_to "Community", community_projects_path, class: 'item'
+      = link_to "Volunteers", volunteer_projects_path, class: 'item'
+    .ui.main.text.container
+      - if @projects
+        .ui.segment
+          = render 'layouts/filter'
+      .full.height style="height:100%"
+        = yield
+    .ui.inverted.vertical.footer.segment
+      .ui.center.aligned.container.row
+        .three.wide.column
+          | Impress
+        .three.wide.column
+          | Contact
+        .three.wide.column
+          =link_to 'Login', login_path
+

@@ -1,0 +1,5 @@
+require 'opal_ujs'
+require 'turbolinks'
+require 'semantic-ui.js'
+require 'local_time'
+require_tree '.'

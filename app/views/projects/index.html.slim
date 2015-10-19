@@ -9,8 +9,7 @@ p#notice
       .content
         .header= project.name
         .meta
-          .ui.star.rating data-rating=project.rating
-          =project.rating
+          .ui.huge.star.rating data-rating=project.rating data-max-rating="5"
           -project.categories.each do |category|
             = link_to project
         .description
@@ -19,7 +18,7 @@ p#notice
             = link_to link.name, link.url, class: 'ui button'
       .extra.content
         span.right.floated
-          | Founded #{project.created_at}
+          | Founded #{local_time project.created_at}
         span
           i.user.icon
           = project.owners.pluck(:name).join ", "

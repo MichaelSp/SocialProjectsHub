@@ -1,8 +1,8 @@
-p#notice
+p#notice.ui.note
   = notice
 h1
   | Listing Users
-table
+table.ui.table
   thead
     tr
       th
@@ -11,8 +11,6 @@ table
         | Email
       th
         | Phone
-      th
-        | Encrypted password
       th[colspan="3"]
   tbody
     - @users.each do |user|
@@ -24,12 +22,10 @@ table
         td
           = user.phone
         td
-          = user.encrypted_password
-        td
           = link_to 'Show', user
         td
           = link_to 'Edit', edit_user_path(user)
         td
           = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
 br
-= link_to 'New User', new_user_path
+= link_to 'New User', new_user_path, class: 'ui green  button'

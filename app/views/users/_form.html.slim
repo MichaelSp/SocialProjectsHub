@@ -1,28 +1,8 @@
-= form_for(@user, class: 'ui form') do |f|
-  - if @user.errors.any?
-    #error_explanation
-      h2
-        = pluralize(@user.errors.count, "error")
-        |  prohibited this user from being saved:
-      ul
-        - @user.errors.full_messages.each do |message|
-          li
-            = message
-  .field
-    = f.label :name
-    br
-    = f.text_field :name
-  .field
-    = f.label :email
-    br
-    = f.text_field :email
-  .field
-    = f.label :phone
-    br
-    = f.text_field :phone
-  .field
-    = f.label :encrypted_password
-    br
-    = f.text_field :encrypted_password
-  .actions
-    = f.submit
+= form_for(@user, html: {class: 'ui form'}) do |f|
+  = f.validation_errors
+  = f.text_field :name
+  = f.email_field :email
+  = f.text_field :phone
+  = f.password_field :password
+  = f.password_field :password_confirmation
+  = f.submit

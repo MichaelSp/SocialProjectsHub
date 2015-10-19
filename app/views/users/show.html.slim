@@ -12,10 +12,6 @@ p
   strong
     | Phone:
   = @user.phone
-p
-  strong
-    | Encrypted password:
-  = @user.encrypted_password
 = link_to 'Edit', edit_user_path(@user)
-|  | 
+|  |
 = link_to 'Back', users_path

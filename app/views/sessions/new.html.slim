@@ -1,0 +1,19 @@
+.ui.middle.aligned.center.aligned.grid
+  .column.animated.fadeInDown
+    .content
+      | Log-in to your account
+    form.ui.large.form
+      .ui.stacked.segment
+        .field
+          .ui.left.icon.input
+            i.user.icon
+            input name="email" placeholder=("E-mail address") type="text"
+        .field
+          .ui.left.icon.input
+            i.lock.icon
+            input name="password" placeholder="Password" type="password"
+        .ui.fluid.large.green.submit.button Login
+      .ui.error.message
+    .ui.message
+      | New to us?
+      =< link_to 'Sign Up', new_user_path

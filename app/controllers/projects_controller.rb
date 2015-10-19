@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
 
   [:refugee, :community, :entrepreneur, :volunteer].each do |name|
     define_method name do
-      @projects = Project.includes(:positions).where(positions: { target_group: Position.target_groups[name] })
+      @projects = Project.includes(:positions).where(positions: {target_group: Position.target_groups[name]})
       render :index
     end
   end
@@ -27,7 +27,9 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @project.positions.build if @project.positions.empty?
+    Position.target_groups.each do |target_group, id|
+      @project.positions.build target_group: target_group unless @project.positions.send(target_group).empty?
+    end
   end
 
   # POST /projects
@@ -71,14 +73,14 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name, :gps_position, :target_group, :rating,
-                                      positions_attributes: [:pos, :target_group])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:name, :gps_position, :target_group, :rating,
+                                    positions_attributes: [:pos, :target_group])
+  end
 end

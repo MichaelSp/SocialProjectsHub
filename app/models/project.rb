@@ -6,4 +6,5 @@ class Project < ActiveRecord::Base
   has_many :positions
 
   accepts_nested_attributes_for :positions
+
 end

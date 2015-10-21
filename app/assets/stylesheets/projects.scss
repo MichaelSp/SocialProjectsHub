@@ -3,6 +3,10 @@
 .segment.project {
   &>img {
     width: 105%;
-    margin: -16px;
+    margin: -15px;
+  }
+
+  .ui.sticky.segment {
+    margin-top: 160px;
   }
 }

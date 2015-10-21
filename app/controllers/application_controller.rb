@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   private
 
   def create_filter
-    @filter = Filter.new params
+    @filter = Filter.new params || {}
   end
 end

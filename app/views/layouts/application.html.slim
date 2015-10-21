@@ -18,8 +18,7 @@ html
         - if @projects
           .ui.segment
             = render 'layouts/filter'
-        .full.height
-          = yield
+        = yield
     .ui.inverted.vertical.footer.segment#footer
       .ui.center.aligned.container
         .ui.stackable.inverted.divided.grid

@@ -1,2 +1,3 @@
-= form_for :filter, html: {class: 'ui form'} do |f|
-  = f.search_field :project_name
+= form_for :project, html: {id: 'filter', class: 'ui form'}, method: :get do |f|
+  = f.hidden_field :target_group, value: @filter.target_group
+  = f.search_field :project_name, value: @filter.project_name

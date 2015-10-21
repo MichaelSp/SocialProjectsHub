@@ -1,28 +1,30 @@
-p#notice
-  = notice
+#projects
+  p#notice
+    = notice
 
-.ui.link.cards
-  - @projects.each do |project|
-    .card
-      a.image href=project_path(project)
-        = image_tag 'placeholder.png'
-      .content
-        .header= project.name
-        .meta
-          .ui.huge.star.rating data-rating=project.rating data-max-rating="5"
-          -project.categories.each do |category|
-            = link_to project
-        .description
-          = project.description
-          - project.links.each do |link|
-            = link_to link.name, link.url, class: 'ui button'
-      .extra.content
-        span.right.floated
-          | Founded #{local_time project.created_at}
-        span
-          i.user.icon
-          = project.owners.pluck(:name).join ", "
+  .ui.link.cards
+    - @projects.each do |project|
+      .card
+        a.image href=project_path(project)
+          = image_tag 'placeholder.png'
+        .content
+          .header= project.name
+          .meta
+            .ui.huge.star.rating data-rating=project.rating data-max-rating="5"
+            -project.categories.each do |category|
+              = link_to project
+          .description
+            = project.description
+            - project.links.each do |link|
+              = link_to link.name, link.url, class: 'ui button'
+        .extra.content
+          span.right.floated
+            | Founded #{local_time project.created_at}
+          span
+            i.user.icon
+            = project.owners.pluck(:name).join ", "
 
-br
-hr
-p= link_to 'New Project', new_project_path, class: 'ui green button'
+  br
+  hr
+  br
+  p= link_to 'New Project', new_project_path, class: 'ui green button'

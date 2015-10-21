@@ -1,21 +1,29 @@
-p#notice
-  = notice
-p
-  strong
-    | Name:
-  = @project.name
-p
-  strong
-    | Gps position:
-  = @project.gps_position
-p
-  strong
-    | Target group:
-  = @project.target_group
-p
-  strong
-    | Rating:
-  = @project.rating
-= link_to 'Edit', edit_project_path(@project)
-|  | 
-= link_to 'Back', projects_path
+.ui.segment.project
+  .ui.right.rail
+    .ui.segment
+      = link_to edit_project_path(@project), class: 'ui teal button' do
+        i.edit.icon
+        | Edit
+      = link_to project_path(@project), class: 'ui red button', method: :delete do
+        i.delete.icon
+        | Delete
+  = image_tag @project.links.background.first.try(:url) || 'placeholder.png'
+
+  h1= @project.name
+  .ui.huge.star.rating data-rating=@project.rating data-max-rating="5"
+  -@project.categories do |category|
+    span.ui.tag.label=category.name
+  .ui.very.padded.segment
+    p= @project.description
+  .ui.inverted.very.padded.segment
+    | google map @ #{@project.gps_position}
+  .ui.inverted.very.padded.segment
+    - @project.links.each do |link|
+      = link_to link.url do
+        = link.name
+        = image_tag link.preview_image
+    p
+      strong
+        | Rating:
+      = @project.rating
+

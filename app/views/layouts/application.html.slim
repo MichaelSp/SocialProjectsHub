@@ -7,23 +7,47 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    .ui.four.item.large.inverted.menu
-      = link_to "Refugees", projects_path(target_group: "refugee"), class: 'red item'
-      = link_to "Project Leader", projects_path(target_group: 'entrepreneur'), class: 'item'
-      = link_to "Community", community_projects_path, class: 'item'
-      = link_to "Volunteers", volunteer_projects_path, class: 'item'
-    .ui.main.text.container
-      - if @projects
-        .ui.segment
-          = render 'layouts/filter'
-      .full.height style="height:100%"
-        = yield
-    .ui.inverted.vertical.footer.segment
-      .ui.center.aligned.container.row
-        .three.wide.column
-          | Impress
-        .three.wide.column
-          | Contact
-        .three.wide.column
-          =link_to 'Login', login_path
-
+    #wrap
+      .ui.main.nav
+        .ui.four.item.large.inverted.menu
+          = link_to "Refugees", projects_path(target_group: "refugee"), class: 'red item'
+          = link_to "Project Leader", projects_path(target_group: 'entrepreneur'), class: 'item'
+          = link_to "Community", projects_path(target_group: 'community'), class: 'item'
+          = link_to "Volunteers", projects_path(target_group: 'volunteer'), class: 'item'
+      .ui.main.container#main
+        - if @projects
+          .ui.segment
+            = render 'layouts/filter'
+        .full.height
+          = yield
+    .ui.inverted.vertical.footer.segment#footer
+      .ui.center.aligned.container
+        .ui.stackable.inverted.divided.grid
+          .three.wide.column
+            h4.ui.inverted.header Group 1
+            .ui.inverted.link.list
+              =link_to 'Login', login_path, class: 'ui button'
+          .three.wide.column
+            h4.ui.inverted.header Group 2
+            .ui.inverted.link.list
+              a.item href="#"  Link One
+              a.item href="#"  Link Two
+              a.item href="#"  Link Three
+              a.item href="#"  Link Four
+          .three.wide.column
+            h4.ui.inverted.header Group 3
+            .ui.inverted.link.list
+              a.item href="#"  Link One
+              a.item href="#"  Link Two
+              a.item href="#"  Link Three
+              a.item href="#"  Link Four
+          .seven.wide.column
+            h4.ui.inverted.header We bring
+            p social projects developers and users together
+            = image_tag 'placeholder.png', class: 'ui centered mini image'
+        .ui.inverted.section.divider
+        .ui.horizontal.inverted.small.divided.link.list
+          a.item href="#"  Site Map
+          a.item href="#"  Contact Us
+          a.item href="#"  Terms and Conditions
+          a.item href="#"  Privacy Policy

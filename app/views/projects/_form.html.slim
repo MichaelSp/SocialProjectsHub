@@ -2,6 +2,7 @@
   = form_for(@project, html: {class: 'ui large form'}) do |f|
     = f.validation_errors
     = f.text_field :name
+    = f.text_area :description
     = f.text_field :gps_position
     .field
       label Rating
@@ -11,6 +12,7 @@
     .ui.divider
     .fields
       = f.fields_for :positions, nil, html: {class: "four wide fields"} do |p|
-        = p.number_field :pos, label: "#{target_group} Position", min: 0
+        = p.hidden_field :target_group
+        = p.number_field :pos, label: "#{p.object.target_group.humanize} Position", min: 0
     .actions
       = f.submit

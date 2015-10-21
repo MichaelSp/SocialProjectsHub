@@ -4,7 +4,7 @@ p#notice
 .ui.link.cards
   - @projects.each do |project|
     .card
-      a.image href=edit_project_path(project)
+      a.image href=project_path(project)
         = image_tag 'placeholder.png'
       .content
         .header= project.name

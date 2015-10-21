@@ -1,2 +1,2 @@
-form.ui.form
-  -#= select_tag :target_group, options_for_select(Project.target_groups), placeholder: 'Target Group', class: "select ui search dropdown"
+= form_for :filter, html: {class: 'ui form'} do |f|
+  = f.search_field :project_name

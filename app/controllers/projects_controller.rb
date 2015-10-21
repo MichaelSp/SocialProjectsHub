@@ -4,14 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all.order(:position)
-  end
-
-  [:refugee, :community, :entrepreneur, :volunteer].each do |name|
-    define_method name do
-      @projects = Project.includes(:positions).where(positions: {target_group: Position.target_groups[name]})
-      render :index
-    end
+    @projects = @filter.projects
   end
 
   # GET /projects/1
@@ -22,14 +15,12 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
-    @project.positions.build
+    add_target_groups
   end
 
   # GET /projects/1/edit
   def edit
-    Position.target_groups.each do |target_group, id|
-      @project.positions.build target_group: target_group unless @project.positions.send(target_group).empty?
-    end
+    add_target_groups
   end
 
   # POST /projects
@@ -73,6 +64,13 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def add_target_groups
+    Position.target_groups.each do |target_group, id|
+      @project.positions.build target_group: target_group if @project.positions.send(target_group).empty?
+    end
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_project
     @project = Project.find(params[:id])
@@ -80,7 +78,7 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:name, :gps_position, :target_group, :rating,
-                                    positions_attributes: [:pos, :target_group])
+    params.require(:project).permit(:name, :gps_position, :target_group, :rating, :description,
+                                    positions_attributes: [:id, :pos, :target_group])
   end
 end

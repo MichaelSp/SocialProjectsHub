@@ -51,4 +51,5 @@ source 'https://rubygems.org' do
 end
 source 'https://rails-assets.org' do
   gem 'rails-assets-animate.css'
+  gem 'rails-assets-alertifyjs'
 end

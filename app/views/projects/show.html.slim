@@ -12,7 +12,7 @@
   h1= @project.name
   .ui.huge.star.rating data-rating=@project.rating data-max-rating="5"
   -@project.categories do |category|
-    span.ui.tag.label=category.name
+    span.ui.tag.label= category.name
   .ui.very.padded.segment
     p= @project.description
   .ui.inverted.very.padded.segment

@@ -6,4 +6,18 @@ class Project < ActiveRecord::Base
   has_many :positions, dependent: :destroy
 
   accepts_nested_attributes_for :positions
+
+  def category_ids= cats
+    ids =  cats.map do |cat|
+      next if cat.empty?
+      case cat
+        when /\A\d+\z/
+          cat
+        when String
+          Category.create!(name: cat).id
+      end
+    end.compact
+    super ids
+  end
+
 end

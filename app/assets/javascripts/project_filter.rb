@@ -3,6 +3,22 @@ class ProjectFilter
 
   def initialize form
     @form = form
+    init_search
+    init_categories
+  end
+
+  def init_categories
+    @categories = @form.find('#project_category_ids')
+    @form.on 'click', 'a.category' do |event|
+      event.target.toggle_class('red')
+      @categories.value = @form.find('a.category.red').map do |elem|
+        elem.data('id')
+      end
+      @form.submit
+    end
+  end
+
+  def init_search
     search_field_id = '#project_project_name'
     @search_field = @form.find(search_field_id)
     @search_field.focus

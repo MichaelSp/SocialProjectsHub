@@ -37,7 +37,7 @@ class Forms::Base < ActionView::Helpers::FormBuilder
   end
 
   def collection_select(method, collection, value_method=:id, text_method=:name, options = {}, html_options = {})
-    @template.content_tag 'div', class: "field #{"error" unless object.errors[method].blank?}" do
+    @template.content_tag 'div', class: "field #{"error" if object && !object.errors[method].blank?}" do
       html_options.merge!(class: "#{html_options[:class]} dropdown")
       label(options.delete(:label) { method }) + super(method, collection, value_method, text_method, options, html_options)
     end

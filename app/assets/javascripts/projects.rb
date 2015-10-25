@@ -1,26 +1,38 @@
-Element.expose :dropdown, :rating, :sticky
+class Project
+  def initialize
+    Element['select.dropdown'].dropdown
 
+    Element['.ui.rating'].rating 'disable'
 
+    # Sticky
+    Element['.ui.sticky'].sticky offset: 160
 
-def init
-  Element['select.dropdown'].dropdown
-
-  # Rating
-  Element['.ui.rating'].rating 'disable'
-  Element['#project_rating'].rating('enable')
-  `$('#project_rating').rating('setting', 'onRate', function(val){this.nextSibling.nextSibling.value = val;});`
-
-  # Sticky
-  Element['.ui.sticky'].sticky offset: 160
-
-  #
-  @filter = ProjectFilter.new Element['#filter']
-
-  # Element['#search'].on(:keypress) do |e|
-  #   p e.target
-  #   e.target.form.submit
-  # end
+    @filter = ProjectFilter.new Element['#filter']
+  end
 end
 
-Document.ready? { init }
-Document.on('page:change'){ init }
+class Alertify
+  class << self
+    def prompt name, &block
+      `alertify.prompt(name, function(){block.apply(null, arguments)})`
+    end
+  end
+end
+
+class ProjectForm
+
+  def initialize
+    # Rating
+    Element['#project_rating'].rating('enable')
+    `$('#project_rating').rating('setting', 'onRate', function(val){this.nextSibling.nextSibling.value = val;});`
+
+    # Categories
+    Element['a.add_category'].on 'click' do
+      Alertify.prompt "Add a new category" do |e|
+        if (e)
+          Element['#project_category_ids'].append("<option value=\"#{e}\" selected=\"selected\">#{e}</option>")
+        end
+      end
+    end
+  end
+end

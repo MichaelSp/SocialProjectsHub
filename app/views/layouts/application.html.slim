@@ -6,7 +6,7 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  body
+  body data-controller=controller_name.classify data-action=action_name.classify
     #wrap
       .ui.main.nav
         .ui.four.item.large.inverted.menu

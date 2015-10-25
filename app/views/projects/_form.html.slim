@@ -4,6 +4,11 @@
     = f.text_field :name
     = f.text_area :description
     = f.text_field :gps_position
+    = f.collection_select :category_ids, Category.all, :id, :name, {}, {multiple: true}
+    .field
+      = link_to '#', class: 'ui green button add_category' do
+        i.add.icon
+        |Add Category
     .field
       label Rating
       .ui.huge.star.rating#project_rating data-max-rating="5" data-rating=(f.object.rating || 0).to_s

@@ -127,6 +127,7 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails_stdout_logging (0.0.4)
     railties (4.2.4)
       actionpack (= 4.2.4)
       activesupport (= 4.2.4)
@@ -194,6 +195,7 @@ DEPENDENCIES
   rails (= 4.2.4)!
   rails-assets-alertifyjs!
   rails-assets-animate.css!
+  rails_stdout_logging!
   sass-rails (~> 5.0)!
   sdoc (~> 0.4.0)!
   semantic-ui-sass!

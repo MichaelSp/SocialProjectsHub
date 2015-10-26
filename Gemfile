@@ -34,6 +34,7 @@ source 'https://rubygems.org' do
   group :production do
     gem 'puma'
     gem 'pg'
+    gem 'rails_stdout_logging'
   end
 
 # Use Capistrano for deployment

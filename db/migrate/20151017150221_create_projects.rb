@@ -4,9 +4,7 @@ class CreateProjects < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.string :gps_position
-      t.integer :target_group
       t.float :rating
-      t.integer :position
 
       t.timestamps null: false
     end

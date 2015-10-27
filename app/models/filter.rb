@@ -13,19 +13,19 @@ class Filter
   end
 
   def projects
-    results = Project.includes(:positions).joins(:categories)
+    results = Project.includes(:positions).includes(:categories)
     if target_group
       results = results.where(positions: {target_group: Position.target_groups[target_group]})
       results = results.order('positions.pos')
     end
     results = results.where(categories_projects: {category_id: category_ids}) unless categories.blank?
     search = "%#{project_name}%"
-    results = results.where("`projects`.`name` LIKE ? OR `projects`.`description` LIKE ?", search, search) if project_name
+    results = results.where('"projects"."name" LIKE ? OR "projects"."description" LIKE ? OR "categories"."name" LIKE ?', search, search, search) unless project_name.blank?
     results.uniq
   end
 
   def possible_categories
-    Category.joins(:categories_projects).where(categories_projects: {project_id: projects.ids }).uniq
+    Category.joins(:categories_projects).where(categories_projects: {project_id: projects.map(&:id) }).uniq
   end
 
   def category_ids

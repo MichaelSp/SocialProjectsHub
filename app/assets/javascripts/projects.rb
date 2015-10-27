@@ -30,7 +30,9 @@ class ProjectForm
     Element['a.add_category'].on 'click' do
       Alertify.prompt "Add a new category" do |e|
         if (e)
-          Element['#project_category_ids'].append("<option value=\"#{e}\" selected=\"selected\">#{e}</option>")
+          combo = Element['#project_category_ids']
+          combo.append("<option value=\"#{e}\" selected=\"selected\">#{e}</option>")
+          combo.dropdown('set selected', e)
         end
       end
     end

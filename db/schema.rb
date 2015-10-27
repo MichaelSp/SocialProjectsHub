@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151017162539) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -46,7 +49,7 @@ ActiveRecord::Schema.define(version: 20151017162539) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "positions", ["project_id"], name: "index_positions_on_project_id"
+  add_index "positions", ["project_id"], name: "index_positions_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -73,4 +76,5 @@ ActiveRecord::Schema.define(version: 20151017162539) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "positions", "projects"
 end

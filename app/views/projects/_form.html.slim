@@ -4,7 +4,7 @@
     = f.text_field :name
     = f.text_area :description
     = f.text_field :gps_position
-    = f.collection_select :category_ids, Category.all, :id, :name, {}, {multiple: true}
+    = f.collection_select :category_ids, Category.all, :id, :name, {label: 'Categories'}, {multiple: true}
     .field
       = link_to '#', class: 'ui green button add_category' do
         i.add.icon

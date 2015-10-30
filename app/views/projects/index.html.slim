@@ -2,7 +2,7 @@
   p#notice
     = notice
 
-  .ui.link.cards
+  .ui.link.cards.animated.fadeInUp
     - @projects.each do |project|
       .card
         a.image href=project_path(project)

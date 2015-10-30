@@ -19,9 +19,14 @@ class Filter
       results = results.order('positions.pos')
     end
     results = results.where(categories_projects: {category_id: category_ids}) unless categories.blank?
-    search = "%#{project_name}%"
-    results = results.where('"projects"."name" LIKE ? OR "projects"."description" LIKE ? OR "categories"."name" LIKE ?', search, search, search) unless project_name.blank?
+    results = full_text_search(results) unless project_name.blank?
     results.uniq
+  end
+
+  def full_text_search(results)
+    search = "%#{project_name}%"
+    results = results.where('"projects"."name" LIKE ? OR "projects"."description" LIKE ? OR "categories"."name" LIKE ?', search, search, search)
+    results
   end
 
   def possible_categories

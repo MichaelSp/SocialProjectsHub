@@ -23,30 +23,29 @@ html
       .ui.center.aligned.container
         .ui.stackable.inverted.divided.grid
           .three.wide.column
-            h4.ui.inverted.header Group 1
             .ui.inverted.link.list
               =link_to 'Login', login_path, class: 'ui button'
           .three.wide.column
-            h4.ui.inverted.header Group 2
+            h4.ui.inverted.header Who is it
             .ui.inverted.link.list
-              a.item href="#"  Link One
-              a.item href="#"  Link Two
-              a.item href="#"  Link Three
-              a.item href="#"  Link Four
+              a.item href="http://www.hackerstolz.de/" Hackerstolz
+              a.item href="http://4onemankind.org/"  4 One Mankind
+              a.item href="http://each1teach1.de"  Each 1 Teach 1
           .three.wide.column
-            h4.ui.inverted.header Group 3
+            h4.ui.inverted.header How to Help?
             .ui.inverted.link.list
-              a.item href="#"  Link One
-              a.item href="#"  Link Two
-              a.item href="#"  Link Three
-              a.item href="#"  Link Four
+              | Support one of the
+              = link_to ' projects', projects_path(target_group: 'volunteer')
+              a.item href="https://github.com/MichaelSp/SocialProjectsHub"
+                i.icon.github.square
+                | Fork us
+              a.item href="https://github.com/MichaelSp/SocialProjectsHub/issues" Report Issue
           .seven.wide.column
             h4.ui.inverted.header We bring
             p social projects developers and users together
             = image_tag 'placeholder.png', class: 'ui centered mini image'
         .ui.inverted.section.divider
         .ui.horizontal.inverted.small.divided.link.list
-          a.item href="#"  Site Map
-          a.item href="#"  Contact Us
-          a.item href="#"  Terms and Conditions
-          a.item href="#"  Privacy Policy
+          = link_to 'Contact Us', static_page_about_path, class: 'item'
+          = link_to 'Terms and Conditions', static_page_terms_path, class: 'item'
+          = link_to 'Privacy Policy', static_page_privacy_path, class: 'item'

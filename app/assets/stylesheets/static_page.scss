@@ -5,3 +5,11 @@
 .blur {
   filter: blur(5px);
 }
+
+.wrapper {
+  width: 100%;
+  max-width: 1048px;
+  margin: auto;
+  padding: 0px 20px;
+  clear: both;
+}

@@ -26,7 +26,8 @@ html
             .ui.inverted.link.list
               =link_to 'Login', login_path, class: 'ui button'
           .three.wide.column
-            h4.ui.inverted.header Who is it
+            h4.ui.inverted.header
+              = link_to 'Who is it?', static_page_about_path
             .ui.inverted.link.list
               a.item href="http://www.hackerstolz.de/" Hackerstolz
               a.item href="http://4onemankind.org/"  4 One Mankind
@@ -46,6 +47,6 @@ html
             = image_tag 'placeholder.png', class: 'ui centered mini image'
         .ui.inverted.section.divider
         .ui.horizontal.inverted.small.divided.link.list
-          = link_to 'Contact Us', static_page_about_path, class: 'item'
+          = link_to 'Contact Us', static_page_contact_path, class: 'item'
           = link_to 'Terms and Conditions', static_page_terms_path, class: 'item'
           = link_to 'Privacy Policy', static_page_privacy_path, class: 'item'

@@ -55,9 +55,7 @@ ActiveRecord::Schema.define(version: 20151017162539) do
     t.string   "name"
     t.text     "description"
     t.string   "gps_position"
-    t.integer  "target_group"
     t.float    "rating"
-    t.integer  "position"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

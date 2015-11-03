@@ -15,12 +15,12 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
-    add_target_groups
+    add_relations
   end
 
   # GET /projects/1/edit
   def edit
-    add_target_groups
+    add_relations
   end
 
   # POST /projects
@@ -65,10 +65,13 @@ class ProjectsController < ApplicationController
 
   private
 
-  def add_target_groups
+  def add_relations
     Position.target_groups.each do |target_group, id|
       @project.positions.build target_group: target_group if @project.positions.send(target_group).empty?
     end
+    @project.links.first_or_initialize(category: 'homepage')
+    @project.links.first_or_initialize(category: 'twitter')
+    @project.links.first_or_initialize(category: 'facebook')
   end
 
   # Use callbacks to share common setup or constraints between actions.

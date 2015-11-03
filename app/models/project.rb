@@ -6,6 +6,7 @@ class Project < ActiveRecord::Base
   has_many :positions, dependent: :destroy
 
   accepts_nested_attributes_for :positions
+  accepts_nested_attributes_for :links
 
   def category_ids= cats
     ids =  cats.map do |cat|
@@ -18,6 +19,12 @@ class Project < ActiveRecord::Base
       end
     end.compact
     super ids
+  end
+
+  [:facebook, :twitter, :homepage].each do |link|
+    define_method link do
+      links.send(link).first
+    end
   end
 
 end

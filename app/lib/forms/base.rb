@@ -15,11 +15,34 @@ class Forms::Base < ActionView::Helpers::FormBuilder
     end
   end
 
-  [:text, :email, :password, :number, :phone].each do |type|
-    define_method :"#{type}_field" do |method, options={}|
-      @template.content_tag 'div', class: "field #{"error" unless object.errors[method].blank?}" do
+  [:text_field, :email_field, :password_field, :number_field, :phone_field, :text_area].each do |field_name|
+    define_method field_name do |method, options={}|
+      classes = "field"
+      classes += " inline " if @options.fetch(:inline, false)
+      classes += " error " unless object.errors[method].blank?
+      @template.content_tag 'div', class: classes do
         options[:placeholder] ||= method.to_s.humanize
-        label(options.delete(:label) { method }) + super(method, options)
+        input = if options.fetch(:labeled, false)
+                  @template.content_tag 'div', class: 'ui labeled input' do
+                    tags = @template.content_tag 'div', class: 'ui label' do
+                      options.delete :labeled
+                    end
+                    tags + super(method, options)
+                  end
+                else
+                  super(method, options)
+                end
+        label(options.delete(:label) { method }) + input
+      end
+    end
+  end
+
+  def radio_button method, tag_value, options={}
+    @template.content_tag 'div', class: "field" do
+      @template.content_tag 'div', class: "ui radio checkbox" do
+        question = object.respond_to?(:"#{method}?") ? :"#{method}?" : method
+        input = super(question, tag_value)
+        label(options.delete(:label) { tag_value }) + input
       end
     end
   end

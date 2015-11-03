@@ -1,8 +1,11 @@
 class Project
   def initialize
+    # forms
     Element['select.dropdown'].dropdown
 
     Element['.ui.rating'].rating 'disable'
+
+    Element['.ui.radio.checkbox'].checkbox
 
     # Sticky
     Element['.ui.sticky'].sticky offset: 160

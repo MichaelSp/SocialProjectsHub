@@ -5,7 +5,7 @@ require 'local_time'
 require 'alertifyjs'
 require_tree '.'
 
-Element.expose :dropdown, :rating, :sticky
+Element.expose :dropdown, :rating, :sticky, :checkbox
 
 $pages = {}
 

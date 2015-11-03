@@ -1,6 +1,8 @@
 db:
-  image: postgres
+  image: postgres:9.5
   environment:
     POSTGRES_PASSWORD: dev
+  volumes:
+    - "./db/data:/var/lib/postgresql/data"
   ports:
     - "5432:5432"

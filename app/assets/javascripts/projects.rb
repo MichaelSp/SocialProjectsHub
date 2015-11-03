@@ -26,8 +26,8 @@ class ProjectForm
 
   def initialize
     # Rating
-    Element['#project_rating'].rating('enable')
-    `$('#project_rating').rating('setting', 'onRate', function(val){this.nextSibling.value = val;});`
+    Element['#project_rating_stars'].rating('enable')
+    `$('#project_rating_stars').rating('setting', 'onRate', function(val){$(this).next('input').val(val);});`
 
     # Categories
     Element['a.add_category'].on 'click' do

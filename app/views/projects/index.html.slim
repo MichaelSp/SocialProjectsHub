@@ -2,28 +2,31 @@
   p#notice
     = notice
 
-  .ui.link.cards.animated.fadeInUp
+  .ui.link.three.stackable.cards.animated.fadeInUp
     - @projects.each do |project|
       .card
         a.image href=project_path(project)
-          = image_tag 'placeholder.png'
+          = attachment_image_tag(project.images.first, :file, :fill, 290, 240)
         .content
-          .header= project.name
+          a.header href=(project.homepage || '#')
+            = project.name
           .meta
+            = link_to edit_project_path(project), class: 'ui teal right floated' do
+              i.edit.icon
             .ui.huge.star.rating data-rating=project.rating data-max-rating="5"
             br
             -project.categories.each do |category|
               span.ui.tag.label= link_to category.name, projects_path(category_ids: [category.id], target_group: params[:target_group])
           .description
             = project.description
-            - project.links.each do |link|
-              = link_to link.name, link.url, class: 'ui button'
         .extra.content
           span.right.floated
-            | Founded #{local_time project.created_at}
+            =link_to project.homepage.gsub(/https?:\/\//, ''), project.homepage if project.homepage
           span
-            i.user.icon
-            = project.owners.pluck(:name).join ", "
+            - [:twitter, :facebook].each do |link|
+              - if project.send(link)
+                =link_to project.send(link) do
+                  i class="#{link} large icon"
 
   br
   hr

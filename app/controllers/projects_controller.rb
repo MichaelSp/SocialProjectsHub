@@ -69,9 +69,6 @@ class ProjectsController < ApplicationController
     Position.target_groups.each do |target_group, id|
       @project.positions.build target_group: target_group if @project.positions.send(target_group).empty?
     end
-    @project.links.first_or_initialize(category: 'homepage')
-    @project.links.first_or_initialize(category: 'twitter')
-    @project.links.first_or_initialize(category: 'facebook')
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -82,6 +79,9 @@ class ProjectsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
     params.require(:project).permit(:name, :gps_position, :target_group, :rating, :description,
-                                    positions_attributes: [:id, :pos, :target_group], category_ids: [])
+                                    :facebook, :twitter, :homepage,
+                                    positions_attributes: [:id, :pos, :target_group], category_ids: [],
+                                    images_files: [], images_attributes: [:id, :category]
+    )
   end
 end

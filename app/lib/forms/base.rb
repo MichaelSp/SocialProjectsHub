@@ -41,7 +41,8 @@ class Forms::Base < ActionView::Helpers::FormBuilder
     @template.content_tag 'div', class: "field" do
       @template.content_tag 'div', class: "ui radio checkbox" do
         question = object.respond_to?(:"#{method}?") ? :"#{method}?" : method
-        input = super(question, tag_value)
+        options.merge(value: @object.send(question) ) unless option[:value]
+        input = super(question, tag_value, options)
         label(options.delete(:label) { tag_value }) + input
       end
     end
@@ -60,7 +61,9 @@ class Forms::Base < ActionView::Helpers::FormBuilder
   end
 
   def collection_select(method, collection, value_method=:id, text_method=:name, options = {}, html_options = {})
-    @template.content_tag 'div', class: "field #{"error" if object && !object.errors[method].blank?}" do
+    classes = options.delete(:field_class){'field '}
+    classes += " error" if object && !object.errors[method].blank?
+    @template.content_tag 'div', class: classes do
       html_options.merge!(class: "#{html_options[:class]} dropdown")
       label(options.delete(:label) { method }) + super(method, collection, value_method, text_method, options, html_options)
     end

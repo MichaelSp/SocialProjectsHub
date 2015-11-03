@@ -1,9 +1,12 @@
 
 
 .segment.project {
-  &>img {
-    width: 105%;
+  &>img.background {
+    position: fixed;
+    left: 0;
+    width: 100%;
     margin: -15px;
+    z-index: -1;
   }
 
   .ui.sticky.segment {

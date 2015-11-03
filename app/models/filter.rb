@@ -5,7 +5,7 @@ class Filter
     params = params[:project] if params.has_key?(:project)
     self.target_group = params[:target_group]
     self.project_name = params[:project_name]
-    self.categories = params[:category_ids].blank? ? [] : Category.where(id: params[:category_ids].split(",")).uniq
+    self.categories = params[:category_ids].blank? ? [] : Category.where(id: params[:category_ids].split(",").flatten).uniq
   end
 
   def model_name

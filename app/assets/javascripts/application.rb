@@ -3,6 +3,7 @@ require 'turbolinks'
 require 'semantic-ui.js'
 require 'local_time'
 require 'alertifyjs'
+require 'refile'
 require_tree '.'
 
 Element.expose :dropdown, :rating, :sticky, :checkbox

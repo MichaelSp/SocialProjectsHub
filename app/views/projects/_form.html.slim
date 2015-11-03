@@ -6,14 +6,17 @@
     = f.text_field :facebook, labeled: "<i class=\"facebook icon\"></i>".html_safe
     = f.text_field :twitter, labeled: "<i class=\"twitter icon\"></i>".html_safe
     = f.text_area :description
-    .inline.fields
-      = f.collection_select :category_ids, Category.all, :id, :name, {label: 'Categories'}, {multiple: true}
-      = link_to '#', class: 'ui green button add_category' do
-        i.add.icon
-        |Add Category
+    .fields
+      = f.collection_select :category_ids, Category.all, :id, :name, {label: 'Categories', field_class:'thirteen wide field'}, {multiple: true}
+      .three.wide.field
+        label
+          |&nbsp;
+        = link_to '#', class: 'ui green button add_category' do
+          i.add.icon
+          |Add Category
     .ui.right.floated.field
       label Rating
-      .ui.huge.star.rating#project_rating data-max-rating="5" data-rating=(f.object.rating || 0).to_s
+      .ui.huge.star.rating#project_rating_stars data-max-rating="5" data-rating=(f.object.rating || 0).to_s
       = f.hidden_field :rating
 
     .ui.horizontal.section.divider Ordering
@@ -21,15 +24,12 @@
       = f.fields_for :positions, nil, html: {class: "four wide fields"} do |p|
         = p.hidden_field :target_group
         = p.number_field :pos, label: "#{p.object.target_group.humanize} Position", min: 0
-
     .ui.horizontal.section.divider Images
-    = f.fields_for :links do |l|
-      = l.text_field :name, label: 'Name (optional)'
-      .inline.fields
-        = l.radio_button :category, :image
-        = l.radio_button :category, :background_image
-      = l.text_field :url, labeled: 'http://'
-      = l.file_field :url, labeled: 'http://'
+    = f.fields_for :images, nil, html: {class: "ui inline fields"} do |image|
+      = attachment_image_tag(image.object, :file, :fill, 50, 50)
+      = image.radio_button :category, :background
+      = image.radio_button :category, :image
+    = f.attachment_field :images_files, multiple: true
 
     .ui.section.divider
     .actions

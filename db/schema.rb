@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151017162539) do
+ActiveRecord::Schema.define(version: 20151103192731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,18 +27,12 @@ ActiveRecord::Schema.define(version: 20151017162539) do
     t.integer "category_id", null: false
   end
 
-  create_table "links", force: :cascade do |t|
-    t.string   "url"
-    t.string   "name"
-    t.string   "preview_image"
+  create_table "images", force: :cascade do |t|
+    t.string   "image_id"
     t.string   "category"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  create_table "links_projects", id: false, force: :cascade do |t|
-    t.integer "link_id",    null: false
-    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "project_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -58,6 +52,9 @@ ActiveRecord::Schema.define(version: 20151017162539) do
     t.float    "rating"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "homepage"
+    t.string   "twitter"
+    t.string   "facebook"
   end
 
   create_table "projects_users", id: false, force: :cascade do |t|

@@ -7,21 +7,26 @@
       = link_to project_path(@project), class: 'ui red button', method: :delete do
         i.delete.icon
         | Delete
-  = image_tag @project.links.background.first.try(:url) || 'placeholder.png'
+
+  - if @project.background_image
+    = attachment_image_tag(@project.background_image, :file, :fill, 300, 300, class: 'background')
+  - else
+    = image_tag 'placeholder.png', class: 'background'
 
   h1= @project.name
   .ui.huge.star.rating data-rating=@project.rating data-max-rating="5"
   -@project.categories do |category|
     span.ui.tag.label= category.name
+  .ui.segment
+    p= link_to @project.homepage, @project.homepage if @project.homepage
+    p= link_to @project.twitter, @project.twitter if @project.twitter
+    p= link_to @project.facebook, @project.facebook if @project.facebook
   .ui.very.padded.segment
     p= @project.description
+  - if @project.gps_position
+    .ui.inverted.very.padded.segment
+      | google map @ #{@project.gps_position}
   .ui.inverted.very.padded.segment
-    | google map @ #{@project.gps_position}
-  .ui.inverted.very.padded.segment
-    - @project.links.each do |link|
-      = link_to link.url do
-        = link.name
-        = image_tag link.preview_image
     p
       strong
         | Rating:

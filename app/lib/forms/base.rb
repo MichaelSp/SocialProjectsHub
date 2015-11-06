@@ -41,7 +41,7 @@ class Forms::Base < ActionView::Helpers::FormBuilder
     @template.content_tag 'div', class: "field" do
       @template.content_tag 'div', class: "ui radio checkbox" do
         question = object.respond_to?(:"#{method}?") ? :"#{method}?" : method
-        options.merge(value: @object.send(question) ) unless option[:value]
+        options.merge(value: @object.send(question) ) unless options[:value]
         input = super(question, tag_value, options)
         label(options.delete(:label) { tag_value }) + input
       end

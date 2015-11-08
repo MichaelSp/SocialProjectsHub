@@ -3,7 +3,7 @@ class Filter
 
   def initialize params = {}
     params = params[:project] if params.has_key?(:project)
-    self.target_group = params[:target_group]
+    self.target_group = params[:target_group] || :refugee
     self.project_name = params[:project_name]
     self.categories = params[:category_ids].blank? ? [] : Category.where(id: params[:category_ids].split(",").flatten).uniq
   end

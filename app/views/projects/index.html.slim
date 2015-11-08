@@ -17,9 +17,9 @@
             br
             -project.categories.each do |category|
               span.ui.tag.label= link_to category.name, projects_path(category_ids: [category.id], target_group: params[:target_group])
-          .description
-            = project.description.truncate 200
-            =< link_to 'read more', project
+          =link_to project, class: 'description' do
+            = project.description.truncate 200, separator: /\s/
+            =< link_to 'read more', project, class: 'right floated'
         .extra.content
           span.right.floated
             =link_to project.homepage.gsub(/https?:\/\//, ''), project.homepage if project.homepage
@@ -29,6 +29,4 @@
                 =link_to project.send(link) do
                   i class="#{link} large icon"
 
-  br
-  hr
   br

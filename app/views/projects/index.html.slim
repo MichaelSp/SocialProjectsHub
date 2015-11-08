@@ -6,10 +6,7 @@
     - @projects.each do |project|
       .card
         a.image href=project_path(project)
-          - if project.images.first
-            = attachment_image_tag(project.images.first, :file, :fill, 290, 240)
-          - else
-            = image_tag 'placeholder.png'
+          = attachment_image_tag(project.images.first, :file, :pad, 290, 240, fallback: 'placeholder.png')
         .content
           a.header href=(project.homepage || '#')
             = project.name

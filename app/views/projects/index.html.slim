@@ -25,7 +25,7 @@
             =link_to project.homepage.gsub(/https?:\/\//, ''), project.homepage if project.homepage
           span
             - [:twitter, :facebook].each do |link|
-              - if project.send(link)
+              - unless project.send(link).blank?
                 =link_to project.send(link) do
                   i class="#{link} large icon"
 

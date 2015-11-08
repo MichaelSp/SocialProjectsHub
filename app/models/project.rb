@@ -18,7 +18,7 @@ class Project < ActiveRecord::Base
   end
 
   def background_image
-    images.where(category: 'background').first
+    images.where(category: 'background').first || images.where(category: 'image').first
   end
 
   def category_ids= cats

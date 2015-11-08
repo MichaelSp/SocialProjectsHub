@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     respond_to do |format|
-      if @project.update(project_params)
+      if @project.update(project_params) && delete_images
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -64,6 +64,10 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def delete_images
+    @project.images.where(category: 'delete').destroy_all
+  end
 
   def add_relations
     Position.target_groups.each do |target_group, id|

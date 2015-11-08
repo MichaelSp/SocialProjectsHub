@@ -29,6 +29,7 @@
       = attachment_image_tag(image.object, :file, :fill, 50, 50)
       = image.radio_button :category, :background
       = image.radio_button :category, :image
+      = image.radio_button :category, :delete
     = f.attachment_field :images_files, multiple: true
 
     .ui.section.divider

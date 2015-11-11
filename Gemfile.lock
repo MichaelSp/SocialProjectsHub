@@ -108,10 +108,6 @@ GEM
     opal-rspec (0.4.3)
       opal (>= 0.7.0, < 0.9)
     pg (0.18.3)
-    pg_search (1.0.5)
-      activerecord (>= 3.1)
-      activesupport (>= 3.1)
-      arel
     puma (2.14.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
@@ -223,7 +219,6 @@ DEPENDENCIES
   local_time!
   opal-rails!
   pg!
-  pg_search!
   puma!
   quiet_assets!
   rails (= 4.2.4)!

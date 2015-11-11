@@ -27,7 +27,6 @@ source 'https://rubygems.org' do
   gem 'slim-rails'
   gem 'local_time'
   gem 'opal-rails'
-  gem 'pg_search'
   gem 'activerecord-colored_log_subscriber'
 
   gem "refile", require: "refile/rails"

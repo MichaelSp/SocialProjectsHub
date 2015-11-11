@@ -1,6 +1,22 @@
 .ui.segment.project
-  .right.ui.rail
-    .ui.sticky.segment
+  - if @project.background_image
+    = attachment_image_tag(@project.background_image, :file, :fill, 300, 300, class: 'background')
+  - else
+    = image_tag 'placeholder.png', class: 'background'
+
+  h1= @project.name
+  .ui.left.floated.basic.segment
+    = attachment_image_tag(@project.images.sample, :file, :fill, 300, 300)
+  .ui.right.floated.raised.green.segment
+    .ui.huge.star.rating data-rating=@project.rating data-max-rating="5"
+
+    p= link_to @project.homepage, @project.homepage if @project.homepage
+    p= link_to @project.twitter, @project.twitter if @project.twitter
+    p= link_to @project.facebook, @project.facebook if @project.facebook
+    -@project.categories do |category|
+      span.ui.tag.label= category.name
+    - if User.current
+      .ui.divider
       = link_to edit_project_path(@project), class: 'ui teal button' do
         i.edit.icon
         | Edit
@@ -8,21 +24,7 @@
         i.delete.icon
         | Delete
 
-  - if @project.background_image
-    = attachment_image_tag(@project.background_image, :file, :fill, 300, 300, class: 'background')
-  - else
-    = image_tag 'placeholder.png', class: 'background'
-
-  h1= @project.name
-  .ui.huge.star.rating data-rating=@project.rating data-max-rating="5"
-  -@project.categories do |category|
-    span.ui.tag.label= category.name
-  .ui.segment
-    p= link_to @project.homepage, @project.homepage if @project.homepage
-    p= link_to @project.twitter, @project.twitter if @project.twitter
-    p= link_to @project.facebook, @project.facebook if @project.facebook
-  .ui.very.padded.segment
-    p= @project.description
+  p= @project.description
   - if @project.gps_position
     .ui.inverted.very.padded.segment
       | google map @ #{@project.gps_position}

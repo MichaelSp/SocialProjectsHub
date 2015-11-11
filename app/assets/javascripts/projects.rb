@@ -1,16 +1,15 @@
 class Project
   def initialize
-    # forms
     Element['select.dropdown'].dropdown
-
     Element['.ui.rating'].rating 'disable'
-
     Element['.ui.radio.checkbox'].checkbox
 
-    # Sticky
-    Element['.ui.sticky'].sticky offset: 160
-
     @filter = ProjectFilter.new Element['#filter']
+    @bg_image = Element['.project img.background']
+
+    Document.on 'scroll' do
+      @bg_image.css :top, (Window.scroll.y/-10)
+    end
   end
 end
 

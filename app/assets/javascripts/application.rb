@@ -1,4 +1,5 @@
 require 'opal_ujs'
+require 'opal-browser'
 require 'turbolinks'
 require 'semantic-ui.js'
 require 'local_time'

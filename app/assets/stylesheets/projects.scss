@@ -1,16 +1,26 @@
 
 
 .segment.project {
+  border-radius: inherit;
+
   &>img.background {
     position: fixed;
     left: 0;
     width: 100%;
     margin: -15px;
     z-index: -1;
+    filter: blur(5px);
   }
 
   .ui.sticky.segment {
     margin-top: 160px;
+  }
+
+  p {
+    font: 18px/30px georgia,serif;
+    text-rendering: optimizelegibility;
+    line-height: 36px;
+    text-align: justify;
   }
 }
 

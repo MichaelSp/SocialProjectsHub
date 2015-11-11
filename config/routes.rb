@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   delete :logout, to: 'sessions#destroy'
 
   resources :categories
-  resources :users
+  resources :users, except: [:show]
   resources :projects do
     collection do
       get :refugee

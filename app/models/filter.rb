@@ -20,9 +20,7 @@ class Filter
       results = results.order('positions.pos')
     end
     results = results.where(categories_projects: {category_id: category_ids}) unless categories.blank?
-    p results.to_sql
     results = results.merge(Project.full_text_search(project_name)) unless project_name.blank?
-
     results
   end
 

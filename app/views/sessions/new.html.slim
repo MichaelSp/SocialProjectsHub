@@ -1,4 +1,4 @@
-.ui.two.column.middle.aligned.very.relaxed.stackable.grid
+.ui.two.column.middle.aligned.very.relaxed.stackable.grid.animated.fadeInDown
   .row
     .column
       h1.header Login
@@ -7,18 +7,18 @@
       h1.header Sign Up
   .row
     .column
-      .ui.form
+      =form_for @user, url: login_path, html: {class: 'ui form'} do |f|
         .field
           label Username
           .ui.left.icon.input
-            input placeholder="Username" type="text" /
+            input placeholder="Username or Email" type="text" name="user[login]" value=@user.name
             i.user.icon
         .field
           label Password
           .ui.left.icon.input
-            input type="password" /
+            input type="password" name="user[password]"
             i.lock.icon
-        .ui.blue.submit.button Login
+        = f.submit 'Login', class: 'ui blue button'
     .ui.vertical.divider
       | Or
     .right.aligned.column

@@ -31,16 +31,26 @@ html
             h1 Volunteer
             | and want to support a project with your skills?
       .ui.main.container#main
-        - if @projects
+        -unless flash.empty?
+          -flash.each do |key, value|
+            .ui.inline.message.animated.fadeInDown class=key
+              span.content= value
+
+        - if content_for? :filter
           .ui.segment
-            = render 'layouts/filter'
+            = yield :filter
         = yield
     .ui.inverted.vertical.footer.segment#footer
       .ui.center.aligned.container
         .ui.stackable.inverted.divided.grid
           .three.wide.column
             .ui.inverted.link.list
-              =link_to 'Login & Sign up', login_path, class: 'ui button'
+              - if User.current
+                p= link_to logout_path, method: :delete, class: 'ui red button' do
+                  i.lock.icon
+                  | Logout
+              - else
+                =link_to 'Login & Sign up', login_path, class: 'ui button'
               p Your Project is not listed?
               = link_to new_project_path, class: 'ui green button' do
                 i.large.idea.icon
@@ -67,6 +77,9 @@ html
             = image_tag 'logo.png', class: 'ui centered mini image'
         .ui.inverted.section.divider
         .ui.horizontal.inverted.small.divided.link.list
+          = link_to users_path, class: 'item' do
+            i.users.icon
+            | Users
           = link_to 'Contact Us', static_page_contact_path, class: 'item'
           = link_to 'Terms and Conditions', static_page_terms_path, class: 'item'
           = link_to 'Privacy Policy', static_page_privacy_path, class: 'item'

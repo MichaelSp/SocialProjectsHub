@@ -6,7 +6,7 @@ require 'alertifyjs'
 require 'refile'
 require_tree '.'
 
-Element.expose :dropdown, :rating, :sticky, :checkbox
+Element.expose :dropdown, :rating, :sticky, :checkbox, :nag
 
 $pages = {}
 
@@ -15,6 +15,8 @@ def try_class cls
 end
 
 def init
+  Element['.nag'].nag 'show'
+
   controller_name = Document.body.data('controller')
   action_name = Document.body.data('action')
 

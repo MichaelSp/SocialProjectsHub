@@ -6,7 +6,7 @@ require 'alertifyjs'
 require 'refile'
 require_tree '.'
 
-Element.expose :dropdown, :rating, :sticky, :checkbox, :nag
+Element.expose :dropdown, :rating, :sticky, :checkbox, :nag, :closest, :transition
 
 $pages = {}
 
@@ -16,6 +16,9 @@ end
 
 def init
   Element['.nag'].nag 'show'
+  Element['.message .close'].on 'click' do |event|
+    event.target.closest('.message').transition('fade')
+  end
 
   controller_name = Document.body.data('controller')
   action_name = Document.body.data('action')

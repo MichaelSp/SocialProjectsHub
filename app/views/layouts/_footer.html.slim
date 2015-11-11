@@ -1,0 +1,44 @@
+.ui.inverted.vertical.footer.segment#footer
+  .ui.center.aligned.container
+    .ui.stackable.inverted.divided.grid
+      .three.wide.column
+        .ui.inverted.link.list
+          - if User.current
+            p= link_to logout_path, method: :delete, class: 'ui red button' do
+              i.lock.icon
+              | Logout
+          - else
+            =link_to 'Login & Sign up', login_path, class: 'ui button'
+          p Your Project is not listed?
+          = link_to new_project_path, class: 'ui green button' do
+            i.large.idea.icon
+            | Add Your Project
+      .three.wide.column
+        h4.ui.inverted.header
+          = link_to 'Who is it?', static_page_about_path
+        .ui.inverted.link.list
+          a.item href="http://www.hackerstolz.de/" Hackerstolz
+          a.item href="http://4onemankind.org/"  4 One Mankind
+          a.item href="http://each1teach1.de"  Each 1 Teach 1
+      .three.wide.column
+        h4.ui.inverted.header How to Help?
+        .ui.inverted.link.list
+          | Support one of the
+          = link_to ' projects', projects_path(target_group: 'volunteer')
+          a.item href="https://github.com/MichaelSp/SocialProjectsHub"
+            i.icon.github.square
+            | Fork us
+          a.item href="https://github.com/MichaelSp/SocialProjectsHub/issues" Report an Issue
+      .seven.wide.column
+        h4.ui.inverted.header We bring
+        p social projects developers and users together
+        = image_tag 'logo.png', class: 'ui centered mini image'
+    .ui.inverted.section.divider
+    .ui.horizontal.inverted.small.divided.link.list
+      -if User.current
+        = link_to users_path, class: 'item' do
+          i.users.icon
+          | Users
+      = link_to 'Contact Us', static_page_contact_path, class: 'item'
+      = link_to 'Terms and Conditions', static_page_terms_path, class: 'item'
+      = link_to 'Privacy Policy', static_page_privacy_path, class: 'item'

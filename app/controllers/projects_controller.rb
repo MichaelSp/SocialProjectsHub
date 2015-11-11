@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  #before_action :not_authorized, except: [:show, :index]
 
   # GET /projects
   # GET /projects.json
@@ -64,7 +65,6 @@ class ProjectsController < ApplicationController
   end
 
   private
-
   def delete_images
     @project.images.where(category: 'delete').destroy_all
   end

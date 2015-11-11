@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy]
+  #before_action :not_authorized, except: [:show, :index]
 
   # GET /users
   # GET /users.json

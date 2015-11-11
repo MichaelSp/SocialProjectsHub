@@ -2,7 +2,6 @@
   = f.validation_errors
   = f.text_field :name
   = f.email_field :email
-  = f.text_field :phone
   = f.password_field :password
   = f.password_field :password_confirmation
-  = f.submit
+  = f.submit @user.persisted? ? nil : 'Sign Up'

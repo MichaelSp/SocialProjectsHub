@@ -69,8 +69,10 @@ class Forms::Base < ActionView::Helpers::FormBuilder
     end
   end
 
-  def submit options={}
-    options[:class] ||= 'ui button'
-    super options
+  def submit value=nil, options={}
+    value, options = nil, value if value.is_a?(Hash)
+    color = object.persisted? ? 'blue' : 'green'
+    options[:class] ||= "ui #{color} button"
+    super value, options
   end
 end

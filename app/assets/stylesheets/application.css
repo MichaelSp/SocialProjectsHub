@@ -42,7 +42,9 @@ html, body {height: 100%;}
 #footer {position: relative;
     margin-top: -253px; /* negative value of footer height */
     height: 253px;
-    clear:both;}
+    clear:both;
+    z-index: 10;
+}
 
 /*Opera Fix*/
 body:before {/* thanks to Maleika (Kohoutec)*/

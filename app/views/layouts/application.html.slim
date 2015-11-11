@@ -6,11 +6,12 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    link rel="shortcut icon" href="assets/logo.ico"
   body data-controller=controller_name.classify data-action=action_name.classify
     #wrap
       .ui.main.nav
         .ui.four.large.inverted.buttons
-          = link_to projects_path(target_group: "refugee"), class: 'ui red button' do
+          = link_to projects_path(target_group: "refugee"), class: 'ui green button' do
             | You are a
             h1 Refugee
             | and want to find a project or app?
@@ -20,12 +21,12 @@ html
             h1 Project Leader
             | looking for tools to start or run your business?
           .or
-          = link_to projects_path(target_group: 'community'), class: 'ui green button' do
+          = link_to projects_path(target_group: 'community'), class: 'ui red button' do
             | You are a
             h1 Community
             | and want to have one of the projects in your community?
           .or
-          = link_to projects_path(target_group: 'volunteer'), class: 'ui yellow button' do
+          = link_to projects_path(target_group: 'volunteer'), class: 'ui orange button' do
             | You are a
             h1 Volunteer
             | and want to support a project with your skills?
@@ -39,7 +40,7 @@ html
         .ui.stackable.inverted.divided.grid
           .three.wide.column
             .ui.inverted.link.list
-              =link_to 'Login', login_path, class: 'ui button'
+              =link_to 'Login & Sign up', login_path, class: 'ui button'
               p Your Project is not listed?
               = link_to new_project_path, class: 'ui green button' do
                 i.large.idea.icon
@@ -63,7 +64,7 @@ html
           .seven.wide.column
             h4.ui.inverted.header We bring
             p social projects developers and users together
-            = image_tag 'placeholder.png', class: 'ui centered mini image'
+            = image_tag 'logo.png', class: 'ui centered mini image'
         .ui.inverted.section.divider
         .ui.horizontal.inverted.small.divided.link.list
           = link_to 'Contact Us', static_page_contact_path, class: 'item'

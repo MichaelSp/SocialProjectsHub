@@ -10,6 +10,11 @@ class Project < ActiveRecord::Base
 
   accepts_attachments_for :images, attachment: :file, append: true
 
+  include PgSearch
+  pg_search_scope :full_text_search,
+                  against: [:name, :description],#{name: 'A', homepage: 'B', description: 'D'},
+                  associated_against: {categories: :name}
+
   before_save do
     [:facebook, :twitter, :homepage].each do |link|
       url = send(link)

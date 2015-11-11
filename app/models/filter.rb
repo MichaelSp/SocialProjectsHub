@@ -13,20 +13,16 @@ class Filter
   end
 
   def projects
-    results = Project.includes(:positions).includes(:categories)
+    results = Project.joins(:positions).joins(:categories)
     if target_group
       results = results.where.not(positions: {pos: nil})
       results = results.where(positions: {target_group: Position.target_groups[target_group]})
       results = results.order('positions.pos')
     end
     results = results.where(categories_projects: {category_id: category_ids}) unless categories.blank?
-    results = full_text_search(results) unless project_name.blank?
-    results.uniq
-  end
+    p results.to_sql
+    results = results.merge(Project.full_text_search(project_name)) unless project_name.blank?
 
-  def full_text_search(results)
-    search = "%#{project_name}%"
-    results = results.where('"projects"."name" LIKE ? OR "projects"."description" LIKE ? OR "categories"."name" LIKE ?', search, search, search)
     results
   end
 

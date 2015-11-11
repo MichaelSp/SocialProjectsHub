@@ -1,0 +1,10 @@
+
+one:
+  target_group: 1
+  pos: 1
+  project: one
+
+two:
+  target_group: 2
+  pos: 2
+  project: two

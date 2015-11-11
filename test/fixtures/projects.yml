@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: here comes a realy fancy string
   gps_position: MyString
-  target_group: 1
   rating: 1
+  categories: one
 
 two:
   name: MyString
   gps_position: MyString
-  target_group: 1
   rating: 1
+  categories: two

@@ -29,6 +29,7 @@ source 'https://rubygems.org' do
   gem 'opal-rails'
   gem 'opal-browser'
   gem 'activerecord-colored_log_subscriber'
+  gem 'backup'
 
   gem "refile", require: "refile/rails"
   gem "refile-mini_magick"

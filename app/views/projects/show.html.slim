@@ -6,7 +6,12 @@
 
   h1= @project.name
   .ui.left.floated.basic.segment
-    = attachment_image_tag(@project.images.sample, :file, :fill, 300, 300)
+    .ui.fluid.image
+      - if @project.created_at < 2.weeks.ago
+        .ui.red.ribbon.label
+          i.flag.icon
+          | New
+      = attachment_image_tag(@project.images.sample, :file, :fill, 300, 300)
   .ui.right.floated.raised.green.segment
     .ui.huge.star.rating data-rating=@project.rating data-max-rating="5"
 

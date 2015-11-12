@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @project.owners = [User.current] if User.current
 
     respond_to do |format|
       if @project.save

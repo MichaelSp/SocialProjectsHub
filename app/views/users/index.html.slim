@@ -5,25 +5,23 @@ h1
 table.ui.table
   thead
     tr
-      th
-        | Name
-      th
-        | Email
-      th
-        | Phone
+      th Name
+      th Email
+      th Phone
+      th Admin
       th[colspan="3"]
   tbody
     - @users.each do |user|
       tr
+        td= user.name
+        td= user.email
+        td= user.phone
         td
-          = user.name
-        td
-          = user.email
-        td
-          = user.phone
-        td
-          = link_to 'Edit', edit_user_path(user)
-        td
-          = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+          - if user.admin?
+            i.green.checkmark.icon
+          -else
+            i.red.remove.icon
+        td= link_to 'Edit', edit_user_path(user)
+        td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
 br
 = link_to 'New User', new_user_path, class: 'ui green  button'

@@ -2,7 +2,6 @@ class Project
   def initialize
     Element['select.dropdown'].dropdown
     Element['.ui.rating'].rating 'disable'
-    Element['.ui.radio.checkbox'].checkbox
 
     @filter = ProjectFilter.new Element['#filter']
     @bg_image = Element['.project img.background']

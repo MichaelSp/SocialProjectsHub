@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
     redirect_to projects_path
   end
 
+  def authorize! action, subject
+    Authorization.authorize! action, subject, User.current
+  end
+
   private
 
   def create_filter

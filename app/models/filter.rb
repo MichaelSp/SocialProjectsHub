@@ -16,6 +16,7 @@ class Filter
     results = Project.includes(:positions).includes(:categories)
     if target_group
       results = results.where.not(positions: {pos: nil})
+      results = results.where.not(positions: {pos: 0})
       results = results.where(positions: {target_group: Position.target_groups[target_group]})
       results = results.order('positions.pos')
     end

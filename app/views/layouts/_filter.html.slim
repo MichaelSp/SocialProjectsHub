@@ -4,7 +4,7 @@
   = f.search_field :project_name, value: @filter.project_name
 
   label
-    i.cubes.icon
+    i.tags.icon
   - @filter.possible_categories.each do |category|
     a.ui.tag.label.category class=("red" if @filter.category_ids.include?(category.id)) data-id=category.id =category.name
 

@@ -17,6 +17,8 @@ end
 
 def init
   Element['.nag'].nag 'show'
+  Element['.ui.checkbox'].checkbox 'enable'
+
   Element['.message .close'].on 'click' do |event|
     event.target.closest('.message').transition('fade')
   end

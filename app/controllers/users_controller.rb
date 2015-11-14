@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy]
-  #before_action :not_authorized, except: [:show, :index]
+  before_action do
+    authorize! action_name, @user || User
+  end
 
   # GET /users
   # GET /users.json
@@ -15,6 +17,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user.password = '***'
   end
 
   # POST /users
@@ -65,6 +68,8 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation)
+    p = params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation, :admin)
+    p.delete(:password) and p.delete(:password_confirmation) if p[:password] == '***' || p[:password].blank?
+    p
   end
 end

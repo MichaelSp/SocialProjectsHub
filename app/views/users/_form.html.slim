@@ -4,4 +4,6 @@
   = f.email_field :email
   = f.password_field :password
   = f.password_field :password_confirmation
+  - if @user.persisted?
+    = f.check_box :admin?
   = f.submit @user.persisted? ? nil : 'Sign Up'

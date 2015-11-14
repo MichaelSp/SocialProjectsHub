@@ -21,7 +21,6 @@ class ProjectFilter
   def init_search
     search_field_id = '#project_project_name'
     @search_field = @form.find(search_field_id)
-    @search_field.focus
     @form.on(:keypress, search_field_id) do |event|
       return clear if event.key_code == ESC_KEY
 

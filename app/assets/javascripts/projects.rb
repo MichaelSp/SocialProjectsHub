@@ -1,6 +1,6 @@
 class Project
   def initialize
-    Element['select.dropdown'].dropdown
+    Element['select.dropdown:not(.allowAdditions)'].dropdown
     Element['.ui.rating'].rating 'disable'
 
     @filter = ProjectFilter.new Element['#filter']
@@ -8,14 +8,6 @@ class Project
 
     Document.on 'scroll' do
       @bg_image.css :top, (Window.scroll.y/-10)
-    end
-  end
-end
-
-class Alertify
-  class << self
-    def prompt name, &block
-      `alertify.prompt(name, function(){block.apply(null, arguments)})`
     end
   end
 end
@@ -28,14 +20,6 @@ class ProjectForm
     `$('#project_rating_stars').rating('setting', 'onRate', function(val){$(this).next('input').val(val);});`
 
     # Categories
-    Element['a.add_category'].on 'click' do
-      Alertify.prompt "Add a new category" do |e|
-        if (e)
-          combo = Element['#project_category_ids']
-          combo.append("<option value=\"#{e}\" selected=\"selected\">#{e}</option>")
-          combo.dropdown('set selected', e)
-        end
-      end
-    end
+    Element['select.dropdown.allowAdditions'].dropdown `{"allowAdditions": true}`
   end
 end

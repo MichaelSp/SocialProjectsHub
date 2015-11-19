@@ -76,10 +76,15 @@ class Forms::Base < ActionView::Helpers::FormBuilder
   end
 
   def collection_select(method, collection, value_method=:id, text_method=:name, options = {}, html_options = {})
-    classes = options.delete(:field_class){'field '}
-    classes += " error" if object && !object.errors[method].blank?
-    @template.content_tag 'div', class: classes do
-      html_options.merge!(class: "#{html_options[:class]} dropdown")
+    div_classes = options.delete(:field_class) { 'field ' }
+    div_classes += " error" if object && !object.errors[method].blank?
+    @template.content_tag 'div', class: div_classes do
+      classes = "#{html_options[:class]} dropdown"
+      if options.delete(:multi){false}
+        html_options[:multiple] = ''
+        classes = "multiple search selection #{classes} allowAdditions"
+      end
+      html_options.merge!(class: classes)
       label(method, options[:label]) + super(method, collection, value_method, text_method, options, html_options)
     end
   end

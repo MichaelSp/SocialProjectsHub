@@ -10,6 +10,10 @@ class Project < ActiveRecord::Base
 
   accepts_attachments_for :images, attachment: :file, append: true
 
+  validate do
+    errors.add(:positions, :not_empty) if positions.map(&:pos).compact.empty?
+  end
+
   before_save do
     [:facebook, :twitter, :homepage].each do |link|
       url = send(link)

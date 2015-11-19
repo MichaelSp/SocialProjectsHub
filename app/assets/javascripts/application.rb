@@ -3,6 +3,8 @@ require 'opal-browser'
 require 'turbolinks'
 require 'semantic-ui.js'
 require 'local_time'
+require 'nprogress'
+require 'nprogress-turbolinks'
 require 'alertifyjs'
 require 'refile'
 require_tree '.'
@@ -30,7 +32,7 @@ def init
   $pages[cls] = cls.new if cls
 
   cls = try_class controller_name + action_name
-  cls ||= try_class "#{controller_name}Form" if %w{Edit New}.include?(action_name)
+  cls ||= try_class "#{controller_name}Form" if %w{Edit New Update}.include?(action_name)
   $pages[cls] = cls.new if cls
 end
 

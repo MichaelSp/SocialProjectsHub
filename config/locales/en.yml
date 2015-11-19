@@ -21,3 +21,14 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        project:
+          attributes:
+            positions:
+              not_empty: not selected
+        user:
+          attributes:
+            admin?:
+              cant_revoke_self: can't be revoked by yourselve

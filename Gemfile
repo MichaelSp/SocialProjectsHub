@@ -30,6 +30,7 @@ source 'https://rubygems.org' do
   gem 'opal-browser'
   gem 'activerecord-colored_log_subscriber'
   gem 'backup'
+  gem 'nprogress-rails'
 
   gem "refile", require: "refile/rails"
   gem "refile-mini_magick"
@@ -43,9 +44,6 @@ source 'https://rubygems.org' do
     gem 'rails_stdout_logging'
   end
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
   group :development do
     # Access an IRB console on exception pages or by using <%= console %> in views
     gem 'better_errors'
@@ -55,6 +53,9 @@ source 'https://rubygems.org' do
     gem 'spring'
   end
 
+  group :test do
+    gem 'minitest-rails'
+  end
 end
 source 'https://rails-assets.org' do
   gem 'rails-assets-animate.css'

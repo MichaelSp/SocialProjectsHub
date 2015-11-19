@@ -12,7 +12,7 @@ class AuthorizationBase
 
   def subject_name
     case @subject
-      when ActiveRecord then
+      when ActiveRecord::Base then
         @subject.class.to_s.underscore
       else
         @subject.to_s.underscore

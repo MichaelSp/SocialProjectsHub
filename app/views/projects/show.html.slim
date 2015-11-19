@@ -25,7 +25,7 @@
       = link_to edit_project_path(@project), class: 'ui teal button' do
         i.edit.icon
         | Edit
-      = link_to project_path(@project), class: 'ui red button', method: :delete do
+      = link_to project_path(@project), class: 'ui red button', method: :delete, data: { confirm: 'Are you sure?' } do
         i.delete.icon
         | Delete
 

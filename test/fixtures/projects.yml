@@ -3,11 +3,17 @@
 one:
   name: MyString
   gps_position: MyString
-  target_group: 1
+  description: MyString
   rating: 1
+  homepage: "http://www.google.de"
+  twitter: "@twitter"
+  facebook: "/facebook"
 
 two:
   name: MyString
   gps_position: MyString
-  target_group: 1
+  description: MyString
   rating: 1
+  homepage: "http://www.google.de"
+  twitter: "@twitter"
+  facebook: "/facebook"

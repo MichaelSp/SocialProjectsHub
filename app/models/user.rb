@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  validate do
+    errors.add(:admin?, :cant_revoke_self) if User.current == self
+  end
+
   def self.roles
     {admin: 1}
   end
@@ -14,7 +18,11 @@ class User < ActiveRecord::Base
   end
 
   def admin= value
-    self.roles = roles | value.to_i * self.class.roles[:admin]
+    if value.to_i == 1
+      self.roles = roles | self.class.roles[:admin]
+    else
+      self.roles = roles & ~(self.class.roles[:admin])
+    end
   end
 
   def self.current

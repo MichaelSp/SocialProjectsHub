@@ -10,6 +10,7 @@ class Project < ActiveRecord::Base
 
   accepts_attachments_for :images, attachment: :file, append: true
 
+  validates_presence_of :owners
   validate do
     errors.add(:positions, :not_empty) if positions.map(&:pos).compact.empty?
   end

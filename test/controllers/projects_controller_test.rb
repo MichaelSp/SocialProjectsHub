@@ -3,6 +3,7 @@ require 'test_helper'
 class ProjectsControllerTest < ActionController::TestCase
   setup do
     @project = projects(:one)
+    User.current = users(:one)
   end
 
   test "should get index" do
@@ -18,7 +19,9 @@ class ProjectsControllerTest < ActionController::TestCase
 
   test "should create project" do
     assert_difference('Project.count') do
-      post :create, project: { gps_position: @project.gps_position, name: @project.name, rating: @project.rating, target_group: @project.target_group }
+      post :create, project: { gps_position: @project.gps_position, name: @project.name,
+                               rating: @project.rating, positions_attributes: [{pos: 1, target_group: 'refugee'}]}
+      assert_equal({}, assigns(:project).errors.messages)
     end
 
     assert_redirected_to project_path(assigns(:project))
@@ -35,7 +38,9 @@ class ProjectsControllerTest < ActionController::TestCase
   end
 
   test "should update project" do
-    patch :update, id: @project, project: { gps_position: @project.gps_position, name: @project.name, rating: @project.rating, target_group: @project.target_group }
+    patch :update, id: @project, project: { gps_position: @project.gps_position, name: @project.name,
+                                            rating: @project.rating, positions_attributes: [{pos: 1, target_group: 'refugee'}]}
+    assert_equal({}, assigns(:project).errors.messages)
     assert_redirected_to project_path(assigns(:project))
   end
 

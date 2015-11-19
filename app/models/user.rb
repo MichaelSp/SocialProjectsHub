@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   validate do
-    errors.add(:admin?, :cant_revoke_self) if User.current == self
+    errors.add(:admin?, :cant_revoke_self) if roles_changed? && User.current == self
   end
 
   def self.roles

@@ -11,3 +11,9 @@ two:
   email: MyString
   phone: MyString
   password_digest: MyString
+
+admin:
+  name: admin
+  roles: 1
+  phone: MyString
+  email: My@Mail.de

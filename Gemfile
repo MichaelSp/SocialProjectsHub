@@ -55,6 +55,8 @@ source 'https://rubygems.org' do
 
   group :test do
     gem 'minitest-rails'
+
+    gem 'coveralls', require: false
   end
 end
 source 'https://rails-assets.org' do

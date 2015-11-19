@@ -35,7 +35,7 @@
         = image_tag 'logo.png', class: 'ui centered mini image'
     .ui.inverted.section.divider
     .ui.horizontal.inverted.small.divided.link.list
-      -if User.current
+      -if can? :all, User
         = link_to users_path, class: 'item' do
           i.users.icon
           | Users

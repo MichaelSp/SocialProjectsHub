@@ -20,11 +20,12 @@
     p= link_to @project.facebook, @project.facebook if @project.facebook
     -@project.categories do |category|
       span.ui.tag.label= category.name
-    - if User.current
+    - if can? :edit, @project
       .ui.divider
       = link_to edit_project_path(@project), class: 'ui teal button' do
         i.edit.icon
         | Edit
+    - if can? :destroy, @project
       = link_to project_path(@project), class: 'ui red button', method: :delete, data: { confirm: 'Are you sure?' } do
         i.delete.icon
         | Delete

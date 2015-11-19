@@ -18,8 +18,9 @@
           a.header href=(project.homepage || '#')
             = project.name
           .meta
-            = link_to edit_project_path(project), class: 'ui teal right floated' do
-              i.edit.icon
+            -if can? :edit, project
+              = link_to edit_project_path(project), class: 'ui teal right floated' do
+                i.edit.icon
             .ui.huge.star.rating data-rating=project.rating data-max-rating="5"
             br
             -project.categories.each do |category|

@@ -1,29 +1,17 @@
 class User < ActiveRecord::Base
+  include FlagShihTzu
+  has_secure_password
+
   has_and_belongs_to_many :projects
 
   validates_presence_of :password_digest, :email
-
-  has_secure_password
-
   validate do
     errors.add(:admin?, :cant_revoke_self) if roles_changed? && User.current == self
   end
 
-  def self.roles
-    {admin: 1}
-  end
-
-  def admin?
-    roles & self.class.roles[:admin] == 1
-  end
-
-  def admin= value
-    if value.to_i == 1
-      self.roles = roles | self.class.roles[:admin]
-    else
-      self.roles = roles & ~(self.class.roles[:admin])
-    end
-  end
+  has_flags 1 => :admin,
+            2 => :moderator,
+            column: 'roles'
 
   def self.current
     Thread.current[:current_user]

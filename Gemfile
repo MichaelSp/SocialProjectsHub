@@ -31,6 +31,7 @@ source 'https://rubygems.org' do
   gem 'activerecord-colored_log_subscriber'
   gem 'backup'
   gem 'nprogress-rails'
+  gem 'flag_shih_tzu'
 
   gem "refile", require: "refile/rails"
   gem "refile-mini_magick"

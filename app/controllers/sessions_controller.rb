@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_name(session_params[:login]) || User.where('lower(email) = ?', session_params[:login].downcase).first
     if user.try(:authenticate, session_params[:password])
-      session[:current_user_id] = user.id
+      session[:user_id] = user.id
       User.current = user
       redirect_to projects_path, green: "Hello #{user.name}"
     else
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete :current_user_id
+    session.delete :user_id
     User.current = nil
     redirect_to projects_path
   end

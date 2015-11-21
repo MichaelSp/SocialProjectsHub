@@ -4,7 +4,7 @@ one:
   name: MyString
   email: MyString
   phone: MyString
-  password_digest: MyString
+  password_digest: <%= BCrypt::Password.create 'MyString', cost: 4 %>
 
 two:
   name: MyString

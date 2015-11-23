@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
   end
 
   def self.current=(user)
-
     Thread.current[:current_user] = user
   end
 end

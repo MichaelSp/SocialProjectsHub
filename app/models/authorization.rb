@@ -4,6 +4,10 @@ class Authorization < AuthorizationBase
     @user.try(:admin?)
   end
 
+  def can_create_user? # new registrations
+    true
+  end
+
   def can_update_project?
     @user.try(:admin?) || @subject.owners.include?(@user)
   end

@@ -26,10 +26,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      if User.current
+      if can? :all, User
         redirect_to users_path
       else
-        redirect_to users_path, notice: 'User was successfully created.'
+        User.current = @user
+        session[:user_id] = @user.id
+        redirect_to projects_path, notice: 'User was successfully created.'
       end
     else
       render :new

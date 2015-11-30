@@ -1,9 +1,6 @@
 - content_for :filter do
   = render 'layouts/filter'
 #projects
-  p#notice
-    = notice
-
   .ui.link.three.stackable.cards.animated.fadeInUp
     - @projects.each do |project|
       .card

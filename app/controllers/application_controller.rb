@@ -8,12 +8,12 @@ class ApplicationController < ActionController::Base
   before_action :create_filter
   before_action do
     User.current = session[:user_id] ? User.find(session[:user_id]) : nil
+    @authorize ||= Authorization.new
   end
 
   rescue_from 'AccessDenied' do |exception|
     not_authorized(exception.message)
   end
-
 
   def not_authorized(message)
     flash[:red] = message
@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
 
   def authorize! action, subject
     Authorization.authorize! action, subject, User.current
+  end
+
+  def can? action, subject
+    @authorize.allowed? action, subject, User.current
   end
 
   private

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   before_action :create_filter
   before_action do
-    User.current = User.find(session[:current_user_id]) if session[:current_user_id]
+    User.current = session[:user_id] ? User.find(session[:user_id]) : nil
   end
 
   rescue_from 'AccessDenied' do |exception|

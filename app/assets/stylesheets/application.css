@@ -38,6 +38,7 @@ html, body {height: 100%;}
 
 #main {
     padding-bottom: 253px; /* must be same height as the footer */
+    height: 100%;
 }
 
 #footer {position: relative;

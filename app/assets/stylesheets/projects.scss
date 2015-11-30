@@ -1,11 +1,11 @@
-
-
 .segment.project {
   border-radius: inherit;
+  overflow: auto;
 
   &>img.background {
     position: fixed;
-    left: 0;
+    left: 15px;
+    top: 113px;
     width: 100%;
     margin: -15px;
     z-index: -1;

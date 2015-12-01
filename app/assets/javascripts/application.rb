@@ -17,6 +17,17 @@ def try_class cls
   Object.const_get(cls) if Object.const_defined?(cls)
 end
 
+def piwik
+  base_url = "#{`document.location.protocol`}//piwik.staging.inline.de/"
+
+  `piwik_tracker = Piwik.getTracker("#{base_url}piwik.php", 1);
+  piwik_tracker.trackPageView();
+  piwik_tracker.enableLinkTracking();
+  `
+rescue Exception => e
+  puts e.message
+end
+
 def init
   Element['.nag'].nag 'show'
   Element['.ui.checkbox'].checkbox 'enable'
@@ -34,6 +45,8 @@ def init
   cls = try_class controller_name + action_name
   cls ||= try_class "#{controller_name}Form" if %w{Edit New Update}.include?(action_name)
   $pages[cls] = cls.new if cls
+
+  piwik
 end
 
-Document.on('page:change') { init }
+Document.on('ready page:change') { init }

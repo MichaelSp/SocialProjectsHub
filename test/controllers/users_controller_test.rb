@@ -2,9 +2,9 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
-    @user = users(:admin)
-    User.current = @user
+    login users(:admin)
   end
+  let (:user){users(:one)}
 
   test "should get index" do
     get :index
@@ -19,20 +19,20 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { email: @user.email, password: 'pwd', name: @user.name, phone: @user.phone }
+      post :create, user: { email: user.email, password: 'pwd', name: user.name, phone: user.phone }
       assert_equal({}, assigns(:user).errors.messages)
     end
     assert_redirected_to users_path
   end
 
   test "should get edit" do
-    get :edit, id: @user
+    get :edit, id: user
     assert_response :success
   end
 
   test "should update user" do
-    patch :update, id: @user, user: { email: @user.email, password: 'pwd', name: @user.name,
-                                      phone: @user.phone, admin?: @user.admin? }
+    patch :update, id: user, user: { email: user.email, password: 'pwd', name: user.name,
+                                      phone: user.phone, admin?: user.admin? }
     assert_equal({}, assigns(:user).errors.messages)
     assert_redirected_to users_path
   end

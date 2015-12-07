@@ -2,8 +2,8 @@ require 'test_helper'
 
 class ProjectsControllerTest < ActionController::TestCase
   setup do
+    login users(:one)
     @project = projects(:one)
-    User.current = users(:one)
   end
 
   test "should get index" do

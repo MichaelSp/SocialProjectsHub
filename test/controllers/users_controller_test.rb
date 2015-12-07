@@ -32,7 +32,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should update user" do
     patch :update, id: user, user: { email: user.email, password: 'pwd', name: user.name,
-                                      phone: user.phone, admin?: user.admin? }
+                                      phone: user.phone, admin: user.admin? }
     assert_equal({}, assigns(:user).errors.messages)
     assert_redirected_to users_path
   end
@@ -43,5 +43,21 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to users_path
+  end
+
+  test 'set admin permission' do
+    assert_equal false, user.admin?
+    patch :update, id: user.id, user: { admin: 1}
+    user.reload
+    assert_equal({}, user.errors.messages)
+    assert_equal true, user.admin?
+  end
+
+  test 'set translator permission' do
+    assert_equal false, user.translator?
+    patch :update, id: user.id, user: {translator: 1}
+    user.reload
+    assert_equal({}, user.errors.messages)
+    assert_equal true, user.translator?
   end
 end

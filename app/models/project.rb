@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :owners, class_name: "User"
   has_many :images, dependent: :destroy
+  has_many :project_translations, autosave: true, dependent: :destroy
 
   has_many :positions, dependent: :destroy
 
@@ -39,5 +40,35 @@ class Project < ActiveRecord::Base
     super ids
   end
 
+  def languages
+    [['eng', 'united kingdom']] + project_translations.pluck(:language_code).map{|code| [code, code]}
+  end
+
+  def translation_for name, language
+    return send(name) if language == 'eng'
+    project_translations.find_by_language_code(language).try(:send, name.to_sym) || ''
+  end
+
+  def set_translation_for name, language, text
+    call = :"#{name}="
+    return send(call, text) if language == 'eng'
+    translation = project_translations.exists(language_code: language).first_or_initialize
+    translation.send(call, text)
+    translation.save
+  end
+
+  def method_missing method, *args, &block
+    call = method.to_s
+    if call.starts_with?('name_') || call.starts_with?('description_')
+      if call.ends_with?('=')
+        name, language, text = *[call.sub(/=$/,'').split('_'), args].flatten
+        self.set_translation_for name, language, text
+      else
+        translation_for *call.split('_')
+      end
+    else
+      super
+    end
+  end
 
 end

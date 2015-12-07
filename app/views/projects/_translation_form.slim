@@ -1,0 +1,17 @@
+.ui.top.attached.tabular.menu#lang_menu
+  - @project.languages.each do |code,flag|
+    a.item data-tab=code class=("active" if code=='eng')
+      i class="#{flag} flag"
+      = code.humanize
+  .right.item
+    #language.ui.floating.search.labeled.green.icon.dropdown.button
+      i.add.flag.icon
+      .text Add Language
+      .menu
+        .item Deutsch
+        .item Arabisch
+
+- @project.languages.each do |code,flag|
+  .ui.bottom.attached.tab data-tab=code class=("active" if code=='eng')
+    = f.text_field :"name_#{code}"
+    = f.text_area :"description_#{code}"

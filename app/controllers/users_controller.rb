@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.order(:name)
   end
 
   # GET /users/new
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    p = params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation, :admin)
+    p = params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation, :admin, :translator)
     p.delete(:password) and p.delete(:password_confirmation) if p[:password] == '***' || p[:password].blank?
     p
   end

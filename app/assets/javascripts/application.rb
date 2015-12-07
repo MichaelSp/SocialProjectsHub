@@ -9,7 +9,7 @@ require 'alertifyjs'
 require 'refile'
 require_tree '.'
 
-Element.expose :dropdown, :rating, :sticky, :checkbox, :nag, :closest, :transition
+Element.expose :dropdown, :rating, :sticky, :checkbox, :nag, :closest, :transition, :tab, :insert_before
 
 $pages = {}
 

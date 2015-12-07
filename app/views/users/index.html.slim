@@ -8,6 +8,7 @@ table.ui.table
       th Name
       th Email
       th Phone
+      th Translator
       th Admin
       th[colspan="3"]
   tbody
@@ -16,11 +17,9 @@ table.ui.table
         td= user.name
         td= user.email
         td= user.phone
-        td
-          - if user.admin?
-            i.green.checkmark.icon
-          -else
-            i.red.remove.icon
+        td= checkmark_icon_if user.translator?
+        td= checkmark_icon_if user.admin?
+
         td= link_to 'Edit', edit_user_path(user), class: 'ui blue button'
         td= link_to 'Destroy', user, class: 'ui red button', method: :delete, data: { confirm: 'Are you sure?' }
 br

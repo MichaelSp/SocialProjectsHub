@@ -21,5 +21,17 @@ class ProjectForm
 
     # Categories
     Element['select.dropdown.allowAdditions'].dropdown `{"allowAdditions": true}`
+
+    #Language Tabs
+    Element['.menu .item'].tab
+    Element['#language.ui.dropdown'].dropdown(`{onChange: self.$add_language}`)
+  end
+
+  def add_language value, text
+    menu_active = Element['#lang_menu .item.active']
+    menu_item = menu_active.clone
+    menu_active.remove_class 'active'
+
+    Element[menu_item].insert_before 'form .menu .right.item'
   end
 end

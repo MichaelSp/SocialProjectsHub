@@ -5,12 +5,14 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :projects
 
   validates_presence_of :password_digest, :email
+
   validate do
-    errors.add(:admin?, :cant_revoke_self) if roles_changed? && User.current == self
+    errors.add(:admin?, :cant_revoke_self) and (self.admin=true) if admin_changed? && not_admin? && User.current == self
   end
 
   has_flags 1 => :admin,
             2 => :moderator,
+            3 => :translator,
             column: 'roles'
 
   def self.current

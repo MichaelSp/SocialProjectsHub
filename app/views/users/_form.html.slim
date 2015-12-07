@@ -6,4 +6,5 @@
   = f.password_field :password_confirmation
   - if @user.persisted?
     = f.check_box :admin?
+    = f.check_box :translator?
   = f.submit @user.persisted? ? nil : 'Sign Up'

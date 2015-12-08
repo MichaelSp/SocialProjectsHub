@@ -5,7 +5,7 @@
     - @projects.each do |project|
       .card
         .ui.fluid.image
-          - if project.created_at < 2.weeks.ago
+          - if project.created_at > 2.weeks.ago
             .ui.red.ribbon.label
               i.flag.icon
               | New

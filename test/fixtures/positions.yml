@@ -1,5 +1,5 @@
 
 one:
-  target_group: community
+  target_group: 3
   pos: 3
   project: one

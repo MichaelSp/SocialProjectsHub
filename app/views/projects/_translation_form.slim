@@ -1,17 +1,16 @@
 .ui.top.attached.tabular.menu#lang_menu
-  - @project.languages.each do |code,flag|
-    a.item data-tab=code class=("active" if code=='eng')
-      i class="#{flag} flag"
-      = code.humanize
+  - @project.languages.each do |lang|
+    a.item data-tab=lang.iso_639_1 class=("active" if lang.iso_639_1=='en')
+      = lang.name
   .right.item
     #language.ui.floating.search.labeled.green.icon.dropdown.button
       i.add.flag.icon
       .text Add Language
       .menu
-        .item Deutsch
-        .item Arabisch
+        -LanguageList::COMMON_LANGUAGES.each do |lang|
+          .item data-value=lang.iso_639_1 =lang.name
 
-- @project.languages.each do |code,flag|
-  .ui.bottom.attached.tab data-tab=code class=("active" if code=='eng')
-    = f.text_field :"name_#{code}"
-    = f.text_area :"description_#{code}"
+- @project.languages.each do |lang|
+  .ui.bottom.attached.transition.pulse.tab data-tab=lang.iso_639_1 class=("active" if lang.iso_639_1=='en')
+    = f.text_field :"name_#{lang.iso_639_1}", label: "Name", placeholder: "Name in #{lang.name}"
+    = f.text_area :"description_#{lang.iso_639_1}", label: "Description", placeholder: "Description in #{lang.name}"

@@ -84,10 +84,12 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:name, :gps_position, :target_group, :rating, :description,
-                                    :facebook, :twitter, :homepage,
-                                    positions_attributes: [:id, :pos, :target_group], category_ids: [],
-                                    images_files: [], images_attributes: [:id, :category]
+    p = params.require(:project).permit(:name, :gps_position, :target_group, :rating, :description,
+                                        :facebook, :twitter, :homepage,
+                                        positions_attributes: [:id, :pos, :target_group], category_ids: [],
+                                        images_files: [], images_attributes: [:id, :category]
     )
+    p.merge! params.require(:project).select { |param| param.starts_with?('name_') || param.starts_with?('description_') }
+    p
   end
 end

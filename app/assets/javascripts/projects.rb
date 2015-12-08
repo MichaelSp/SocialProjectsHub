@@ -24,14 +24,21 @@ class ProjectForm
 
     #Language Tabs
     Element['.menu .item'].tab
-    Element['#language.ui.dropdown'].dropdown(`{onChange: self.$add_language}`)
+    Element['#language.ui.dropdown'].dropdown(`{onChange: function(v,t){ self.$add_language(v,t)}} `)
   end
 
   def add_language value, text
-    menu_active = Element['#lang_menu .item.active']
-    menu_item = menu_active.clone
-    menu_active.remove_class 'active'
+    tab_eng = Element['.ui.tab[data-tab="eng"]']
+    tab = tab_eng.clone
+    tab.attr('data-tab', value)
+    tab.find('#project_name_eng').attr('id', "project_name_#{value}").attr("name", "project[name_#{value}]")
+    tab.find('#project_description_eng').attr('id', "project_description_#{value}").attr("name", "project[name_#{value}]")
+    tab_eng.after tab
+    tab_eng.remove_class 'active'
 
-    Element[menu_item].insert_before 'form .menu .right.item'
+    Element['.menu .item.active'].remove_class 'active'
+    menu_item = "<a class=\"item active\" data-tab=\"#{value}\">#{text}</a>"
+    `$(#{menu_item}).insertBefore('form .menu .right.item')`
+    Element['.menu .item'].tab
   end
 end

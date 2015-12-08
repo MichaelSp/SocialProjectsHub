@@ -33,6 +33,7 @@ source 'https://rubygems.org' do
   gem 'nprogress-rails'
   gem 'flag_shih_tzu'
   gem 'piwik_analytics'
+  gem 'language_list'
 
   gem "refile", require: "refile/rails"
   gem "refile-mini_magick"

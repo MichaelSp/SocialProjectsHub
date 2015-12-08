@@ -41,7 +41,7 @@ class Project < ActiveRecord::Base
   end
 
   def languages
-    [['eng', 'united kingdom']] + project_translations.pluck(:language_code).map{|code| [code, code]}
+    (['eng'] + project_translations.pluck(:language_code)).map{|code| LanguageList::LanguageInfo.find(code)}
   end
 
   def translation_for name, language
@@ -52,7 +52,7 @@ class Project < ActiveRecord::Base
   def set_translation_for name, language, text
     call = :"#{name}="
     return send(call, text) if language == 'eng'
-    translation = project_translations.exists(language_code: language).first_or_initialize
+    translation = project_translations.where(language_code: language).first_or_initialize
     translation.send(call, text)
     translation.save
   end

@@ -1,12 +1,12 @@
 .ui.segment
   = form_for(@project, html: {class: 'ui large form'}) do |f|
     = f.validation_errors
-    -if User.current.translator? || User.current.admin?
+    -if User.current && (User.current.translator? || User.current.admin?)
       = render 'translation_form', {f: f}
     -else
       = f.text_field :name
       = f.text_area :description
-    - if User.current.admin?
+    - if (User.current && User.current.admin?) || (User.current.nil? && !@project.persisted?)
       = f.text_field :homepage, labeled: 'http://'
       = f.text_field :facebook, labeled: "<i class=\"facebook icon\"></i>".html_safe
       = f.text_field :twitter, labeled: "<i class=\"twitter icon\"></i>".html_safe

@@ -41,17 +41,24 @@ class Project < ActiveRecord::Base
   end
 
   def languages
-    (['eng'] + project_translations.pluck(:language_code)).map{|code| LanguageList::LanguageInfo.find(code)}
+    (['en'] + project_translations.pluck(:language_code)).uniq.map{|code| LanguageList::LanguageInfo.find(code)}
+  end
+
+  def locale_name
+    translation_for :name, I18n.locale
+  end
+  def locale_description
+    translation_for :description, I18n.locale
   end
 
   def translation_for name, language
-    return send(name) if language == 'eng'
+    return send(name) if language == 'en'
     project_translations.find_by_language_code(language).try(:send, name.to_sym) || ''
   end
 
   def set_translation_for name, language, text
     call = :"#{name}="
-    return send(call, text) if language == 'eng'
+    return send(call, text) if language == 'en'
     translation = project_translations.where(language_code: language).first_or_initialize
     translation.send(call, text)
     translation.save

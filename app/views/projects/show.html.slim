@@ -4,7 +4,7 @@
   - else
     = image_tag 'placeholder.png', class: 'background'
 
-  h1= @project.name
+  h1= @project.locale_name
   .ui.left.floated.basic.segment
     .ui.fluid.image
       - if @project.created_at < 2.weeks.ago
@@ -30,7 +30,7 @@
         i.delete.icon
         | Delete
 
-  p= @project.description
+  p= @project.locale_description
   - if @project.gps_position
     .ui.inverted.very.padded.segment
       | google map @ #{@project.gps_position}

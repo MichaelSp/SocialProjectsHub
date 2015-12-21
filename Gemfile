@@ -35,6 +35,9 @@ source 'https://rubygems.org' do
   gem 'piwik_analytics'
   gem 'language_list'
 
+  gem 'rack-contrib' # for Rack::Locale
+  gem 'rails-i18n'
+
   gem "refile", require: "refile/rails"
   gem "refile-mini_magick"
 

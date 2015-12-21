@@ -24,21 +24,32 @@ class ProjectForm
 
     #Language Tabs
     Element['.menu .item'].tab
-    Element['#language.ui.dropdown'].dropdown(`{onChange: function(v,t){ self.$add_language(v,t)}} `)
+    Element['#language.ui.dropdown'].dropdown(`{onChange: function(v,t){ self.$add_language(v,t)}} `).dropdown("save defaults")
   end
 
   def add_language value, text
-    tab_eng = Element['.ui.tab[data-tab="eng"]']
-    tab = tab_eng.clone
+    return if Element[".ui.tab[data-tab=\"#{value}\"]"].any?
+    tab_en = Element['.ui.tab[data-tab="en"]']
+    tab = tab_en.clone
     tab.attr('data-tab', value)
-    tab.find('#project_name_eng').attr('id', "project_name_#{value}").attr("name", "project[name_#{value}]")
-    tab.find('#project_description_eng').attr('id', "project_description_#{value}").attr("name", "project[name_#{value}]")
-    tab_eng.after tab
-    tab_eng.remove_class 'active'
+    name = tab.find('#project_name_en')
+    name.attr('id', "project_name_#{value}")
+    name.attr("name", "project[name_#{value}]")
+    name.attr('placeholder', name.attr('placeholder').sub('English', text) )
+    description = tab.find('#project_description_en')
+    description.attr('id', "project_description_#{value}")
+    description.attr("name", "project[description_#{value}]")
+    description.attr('placeholder', description.attr('placeholder').sub('English', text) )
+    tab_en.after tab
+    tab.add_class 'active'
+    tab_en.remove_class 'active'
 
     Element['.menu .item.active'].remove_class 'active'
     menu_item = "<a class=\"item active\" data-tab=\"#{value}\">#{text}</a>"
     `$(#{menu_item}).insertBefore('form .menu .right.item')`
     Element['.menu .item'].tab
+
+    Element["#language.ui.dropdown .item[data-value=\"#{value}\"]"].remove
+    Element['#language.ui.dropdown'].dropdown("restore default text").dropdown("refresh")
   end
 end

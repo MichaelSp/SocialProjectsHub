@@ -13,7 +13,7 @@
             = attachment_image_tag(project.images.first, :file, :pad, 290, 240, fallback: 'placeholder.png')
         .content
           a.header href=(project.homepage || '#')
-            = project.name
+            = project.locale_name
           .meta
             -if can? :edit, project
               = link_to edit_project_path(project), class: 'ui teal right floated' do
@@ -23,7 +23,7 @@
             -project.categories.each do |category|
               span.ui.tag.label= link_to category.name, projects_path(category_ids: [category.id], target_group: params[:target_group])
           =link_to project, class: 'description' do
-            = project.description.truncate 200, separator: /\s/
+            = project.locale_description.truncate 200, separator: /\s/
             =< link_to 'read more', project, class: 'right floated'
         .extra.content
           span.right.floated

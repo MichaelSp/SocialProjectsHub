@@ -45,10 +45,10 @@ class Project < ActiveRecord::Base
   end
 
   def locale_name
-    translation_for :name, I18n.locale
+    project_translations.find_by_language_code(I18n.locale).try(:name) || name
   end
   def locale_description
-    translation_for :description, I18n.locale
+    project_translations.find_by_language_code(I18n.locale).try(:description) || description
   end
 
   def translation_for name, language

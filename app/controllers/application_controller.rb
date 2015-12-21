@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
     User.current = session[:user_id] ? User.find(session[:user_id]) : nil
     @authorize ||= Authorization.new
   end
+  before_action do
+    response.headers['Content-Security-Policy'] = "script-src 'unsafe-inline' 'self' http://piwik.staging.inline.de"
+  end
 
   rescue_from 'AccessDenied' do |exception|
     not_authorized(exception.message)

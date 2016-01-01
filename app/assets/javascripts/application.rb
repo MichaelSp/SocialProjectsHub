@@ -18,9 +18,7 @@ def try_class cls
 end
 
 def piwik
-  base_url = "#{`document.location.protocol`}//piwik.staging.inline.de/"
-
-  `piwik_tracker = Piwik.getTracker("#{base_url}piwik.php", 1);
+  `piwik_tracker = Piwik.getTracker(document.location.protocol + "//piwik.staging.inline.de/piwik.php", 1);
   piwik_tracker.trackPageView();
   piwik_tracker.enableLinkTracking();
   `

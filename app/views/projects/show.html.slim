@@ -15,9 +15,9 @@
   .ui.right.floated.raised.green.segment
     .ui.huge.star.rating data-rating=@project.rating data-max-rating="5"
 
-    p= link_to @project.homepage, @project.homepage if @project.homepage
-    p= link_to @project.twitter, @project.twitter if @project.twitter
-    p= link_to @project.facebook, @project.facebook if @project.facebook
+    p= link_to @project.homepage, @project.homepage, target: :_blank if @project.homepage
+    p= link_to @project.twitter, @project.twitter, target: :_blank if @project.twitter
+    p= link_to @project.facebook, @project.facebook, target: :_blank if @project.facebook
     -@project.categories do |category|
       span.ui.tag.label= category.name
     - if can? :edit, @project

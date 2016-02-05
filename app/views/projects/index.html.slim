@@ -27,11 +27,11 @@
             =< link_to 'read more', project, class: 'right floated'
         .extra.content
           span.right.floated
-            =link_to project.homepage.gsub(/https?:\/\//, ''), project.homepage if project.homepage
+            =link_to project.homepage.gsub(/https?:\/\//, ''), project.homepage, target: :_blank if project.homepage
           span
             - [:twitter, :facebook].each do |link|
               - unless project.send(link).blank?
-                =link_to project.send(link) do
+                =link_to project.send(link), target: :_blank do
                   i class="#{link} large icon"
 
   br

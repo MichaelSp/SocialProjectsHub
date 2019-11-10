@@ -13,6 +13,10 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
+    - name: Setup PostgreSQL
+      uses: Harmon758/postgresql-action@v1.0.0
+      with:
+        postgresql version: '9.5'
     - name: Setup System
       run: sudo apt-get install libsqlite3-dev libpq-dev libssl-dev
     - name: Build and test with Rake
